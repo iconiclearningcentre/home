@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="my">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Japanese Language Placement Test</title>
+  <title>English Language Placement Test</title>
 
   <!-- EmailJS SDK -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -151,14 +151,14 @@
 
   <div class="container">
 
-    <!-- PAGE 1: Landing Page / Welcome Section -->
+    <!-- PAGE 1: Landing Page / User Registration -->
     <div id="page-welcome" class="page-view active">
-      <h1>Japanese Language Placement Test</h1>
+      <h1>English Placement Test</h1>
       <p>ကျေးဇူးပြု၍ သင်၏ အချက်အလက်များ ဖြည့်သွင်းပြီး စာမေးပွဲကို စတင်ဖြေဆိုပါ။</p>
       
       <form id="user-info-form">
         <label for="student_name"><strong>အမည် (Full Name):</strong></label>
-        <input type="text" id="student_name" class="input-field" placeholder="မောင်မောင်" required>
+        <input type="text" id="student_name" class="input-field" placeholder="Name" required>
 
         <label for="student_email"><strong>အီးမေးလ် (Email Address):</strong></label>
         <input type="email" id="student_email" class="input-field" placeholder="example@gmail.com" required>
@@ -202,24 +202,31 @@
 
   <script>
     // ==========================================
-    // မေးခွန်းများ စာရင်း (ဒီမှာ မေးခွန်း ၆၀ အထိ တိုးချဲ့ ထည့်နိုင်ပါတယ်)
+    // မေးခွန်းများ စာရင်း (အဖြေမှန် index: 0=A, 1=B, 2=C, 3=D)
     // ==========================================
     const questions = [
-      { id: 1, text: "これは _____ ですか。", options: ["なん", "なに", "どれ", "dare"], answer: 0 },
-      { id: 2, text: "わたしは 毎日 7時に _____。", options: ["おきます", "ねます", "たべます", "いきます"], answer: 0 },
-      { id: 3, text: "きのう どこへも _____。", options: ["いきませんでした", "いきました", "いきます", "いきません"], answer: 0 },
-      { id: 4, text: "部屋に テーブル _____ イスがあります。", options: ["と", "や", "に", "を"], answer: 0 },
-      { id: 5, text: "この 料理は _____ です。", options: ["おいしい", "おいしくない", "おいしかった", "おいしいです"], answer: 0 },
-      
-      // မေးခွန်း Sample များကို အောက်ပါ format အတိုင်း မေးခွန်း ၆၀ အထိ ကူးပြီး ထည့်နိုင်ပါတယ်:
-      { id: 6, text: "明日 友達 _____ 会います。", options: ["に", "を", "へ", "で"], answer: 0 },
-      { id: 7, text: "日本語 _____ 話すことができます。", options: ["が", "を", "に", "で"], answer: 0 },
-      { id: 8, text: "雨が _____ から、傘を 持っていきます。", options: ["ふっている", "ふります", "ふって", "ふった"], answer: 0 },
-      { id: 9, text: "ここに 車を _____ ください。", options: ["とめないで", "とめます", "とめて", "とめる"], answer: 0 },
-      { id: 10, text: "パスポートを _____ 必要があります。", options: ["みせる", "みせて", "みせます", "みせた"], answer: 0 }
+      { id: 1, text: "I ______ bus on Mondays.", options: ["'m going to work with", "'m going to work by", "go to work with", "go to work by"], answer: 3 },
+      { id: 2, text: "Sorry, but this chair is ______.", options: ["me", "mine", "my", "our"], answer: 1 },
+      { id: 3, text: "A: 'How old ______?'   B: 'I ______ .'", options: ["are you / am 20 years old.", "have you / have 20 years old", "are you / am 20 years.", "do you have / have 20 years."], answer: 0 },
+      { id: 4, text: "I ______ to the cinema.", options: ["not usually go", "don't usually go", "don't go usually", "do not go usually"], answer: 1 },
+      { id: 5, text: "Where ______ ?", options: ["your sister works", "your sister work", "does your sister work", "do your sister work"], answer: 2 },
+      { id: 6, text: "The test is ______ February.", options: ["in", "at", "on", "over"], answer: 0 },
+      { id: 7, text: "I eat pasta ______ week.", options: ["twice in a", "twice a", "one time a", "once in a"], answer: 1 },
+      { id: 8, text: "I don't have ______ free time.", options: ["many", "any", "a lot", "some"], answer: 1 },
+      { id: 9, text: "A: '_____ to the cinema tomorrow?'", options: ["We will go", "Do we go", "We go", "Shall we go"], answer: 3 },
+      { id: 10, text: "We went to the market ______ some vegetables.", options: ["to buy", "for buy", "for to buy", "for buying"], answer: 0 },
+      { id: 11, text: "Sorry, but when you called I ______ a shower.", options: ["had", "did have", "was having", "were having"], answer: 2 },
+      { id: 12, text: "______ are very friendly and very intelligent.", options: ["Dolphins", "The dolphins", "A dolphin", "The dolphin"], answer: 0 },
+      { id: 13, text: "Somebody stole ______ yesterday.", options: ["the car of my mother", "my car mother", "my mother's car", "my mother car"], answer: 2 },
+      { id: 14, text: "______ with me?", options: ["Do you like to dance", "Would you like to dance", "Do you like dance", "Would you like dancing"], answer: 1 },
+      { id: 15, text: "She is ______ her sister, I think.", options: ["more happier than", "more happy that", "happier that", "happier than"], answer: 3 },
+      { id: 16, text: "I couldn't eat ______ before the exam.", options: ["nothing", "anything", "everything", "something"], answer: 1 },
+      { id: 17, text: "Please, pass me the remote. ______ TV.", options: ["I'm watching", "I will watch", "I'm going to watch", "I might watch"], answer: 2 },
+      { id: 18, text: "I'll call you when I ______ home.", options: ["arrive", "'m going to arrive", "will arrive", "arrived"], answer: 0 },
+      { id: 19, text: "Have you ever ______ Japan?", options: ["been to", "gone to", "visited to", "been in"], answer: 0 }
     ];
 
-    const QUESTIONS_PER_PAGE = 5; // တစ်မျက်နှာမှာ ပေါ်မယ့် မေးခွန်း အရေအတွက်
+    const QUESTIONS_PER_PAGE = 5; // တစ်မျက်နှာလျှင် မေးခွန်း ၅ ခုစီ ခွဲပြပါမည်
     let currentPage = 0;
     let userAnswers = {};
     let studentData = {};
@@ -252,6 +259,8 @@
       const end = Math.min(start + QUESTIONS_PER_PAGE, questions.length);
       const pageQuestions = questions.slice(start, end);
 
+      const optionPrefixes = ['A.', 'B.', 'C.', 'D.'];
+
       pageQuestions.forEach((q) => {
         const qDiv = document.createElement('div');
         qDiv.className = 'question-card';
@@ -263,7 +272,7 @@
             <li>
               <label>
                 <input type="radio" name="q_${q.id}" value="${optIdx}" ${isChecked} onchange="saveAnswer(${q.id}, ${optIdx})">
-                ${opt}
+                <strong>${optionPrefixes[optIdx]}</strong>&nbsp; ${opt}
               </label>
             </li>
           `;
@@ -276,7 +285,7 @@
         container.appendChild(qDiv);
       });
 
-      // Update Navigation Buttons & Indicators
+      // Navigation Buttons Update
       const totalPages = Math.ceil(questions.length / QUESTIONS_PER_PAGE);
       document.getElementById('page-indicator').innerText = `Page ${currentPage + 1} of ${totalPages}`;
       
@@ -307,7 +316,6 @@
     }
 
     function submitTest() {
-      // ရမှတ် တွက်ချက်ခြင်း
       let score = 0;
       questions.forEach(q => {
         if (userAnswers[q.id] === q.answer) {
@@ -320,7 +328,6 @@
       submitBtn.disabled = true;
       submitBtn.innerText = "ပို့ဆောင်နေပါသည်...";
 
-      // EmailJS သို့ ပို့ဆောင်မည့် အချက်အလက်များ
       const templateParams = {
         user_name: studentData.name,
         user_email: studentData.email,
