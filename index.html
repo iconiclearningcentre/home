@@ -1,303 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ICONIC Learning Centre</title>
-<style>
-:root{
-  --ink:#171717;
-  --muted:#6e6e6e;
-  --line:#e8e8e8;
-  --soft:#f2f7f4;            /* Soft light greenish-gray background */
-  --accent:#1a5935;          /* ICONIC Primary Dark Green */
-  --accent2:#bd1e1e;         /* ICONIC Accent Red */
-  --dark:#122b1c;            /* Deep Forest Dark for sections */
-  --white:#fff;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.5}
-a{text-decoration:none;color:inherit}
-.container{max-width:1180px;margin:auto;padding:0 28px}
-nav{height:95px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);z-index:10}  .navlinks{display:flex;gap:27px;font-size:14px;color:#444}
-.navlinks a:hover{color:var(--accent)}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:999px;font-size:14px;font-weight:700;border:1px solid var(--ink);transition:.2s}
-.btn.dark{background:var(--accent);color:#fff;border-color:var(--accent)}
-.btn.light{background:#fff;border-color:var(--line)}
-.btn.light:hover{border-color:var(--accent);color:var(--accent)}
-.btn.accent{background:var(--accent2);border-color:var(--accent2);color:#fff}
-.btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
-.hero{padding:85px 0 70px;background:var(--soft);overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
-.eyebrow{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;color:var(--accent)}
-.hero h1{font-size:clamp(44px,6vw,80px);line-height:.95;letter-spacing:-4px;max-width:720px;font-weight:900}
-.hero h1 em{font-style:normal;color:var(--accent2)}
-.hero p{font-size:18px;color:#555;max-width:530px;margin:28px 0}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-.hero-art{min-height:430px;background:var(--dark);border-radius:28px;position:relative;overflow:hidden;padding:30px;color:#fff}
-.hero-art .orb{position:absolute;width:310px;height:310px;border-radius:50%;background:var(--accent);right:-80px;top:-60px;opacity:0.6}
-.hero-art .orb2{position:absolute;width:150px;height:150px;border-radius:50%;background:var(--accent2);left:-40px;bottom:-30px;opacity:0.4}
-.hero-card{position:absolute;left:30px;right:30px;bottom:30px;background:#fff;color:var(--ink);border-radius:20px;padding:24px;z-index:2;box-shadow:0 15px 30px rgba(0,0,0,0.15)}
-.hero-card h3{font-size:27px;line-height:1.05;letter-spacing:-1px;margin-bottom:10px}
-.hero-card p{font-size:14px;color:#666;margin:0}
-.hero-card .tag{background:var(--soft);color:var(--accent)}
-section{padding:95px 0}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:42px}
-.section-head h2{font-size:clamp(36px,5vw,62px);line-height:.98;letter-spacing:-3px;max-width:600px}
-.section-head p{max-width:390px;color:var(--muted)}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{border:1px solid var(--line);border-radius:20px;padding:27px;background:#fff}
-.card:hover{box-shadow:0 12px 35px rgba(0,0,0,.07);transform:translateY(-3px);transition:.25s;border-color:var(--accent)}
-.icon{font-size:34px;margin-bottom:30px;color:var(--accent2)}
-.card h3{font-size:24px;letter-spacing:-1px;margin-bottom:10px}
-.card p{color:var(--muted);font-size:14px}
-.tag{display:inline-block;padding:6px 10px;border-radius:999px;background:#f1f1f1;font-size:11px;font-weight:800;margin-bottom:18px;letter-spacing:0.5px}
-.dark-section{background:var(--dark);color:#fff}
-.dark-section .section-head p,.dark-section .card p{color:#b8b8b8}
-.dark-section .card{background:#1a3324;border-color:#254431}
-.program-card{min-height:320px;display:flex;flex-direction:column;justify-content:space-between}
-.program-card:nth-child(1){background:var(--accent);color:#fff}
-.program-card:nth-child(1) .tag{background:rgba(255,255,255,0.15);color:#fff}
-.program-card:nth-child(1) p{color:#e0ece5}
-.program-card:nth-child(2){background:var(--soft);color:var(--ink);border-color:var(--line)}
-.program-card:nth-child(2) .tag{background:var(--accent2);color:#fff}
-.program-card:nth-child(3){background:#1d1d1b;color:#fff;border-color:#2d2d2a}
-.program-card:nth-child(3) .tag{background:rgba(255,255,255,0.1);color:#aaa}
-.levels{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
-.level{padding:8px 11px;border:1px solid rgba(0,0,0,.15);border-radius:999px;font-size:12px;font-weight:700}
-.program-card:nth-child(1) .level{border-color:rgba(255,255,255,0.3)}
-.test-section{background:var(--accent2);padding:80px 0;color:#fff}
-.test-section h2{color:#fff}
-.test-section p{color:#f5d7d7}
-.test-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.test-grid h2{font-size:clamp(38px,5vw,65px);line-height:.95;letter-spacing:-3px}
-.test-grid p{margin:20px 0;max-width:500px}
-.test-box{background:#fff;border-radius:22px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.08);color:var(--ink)}
-.test-box h3{font-size:24px;margin-bottom:20px}
-.steps{display:grid;gap:14px}
-.step{display:flex;gap:15px;align-items:flex-start}
-.step-num{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800;flex:none}
-.step strong{display:block;font-size:15px}
-.step span{font-size:13px;color:var(--muted)}
-.teacher{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.teacher-card{border:1px solid var(--line);border-radius:18px;overflow:hidden}
-.teacher-photo{height:230px;background:#eaeae7;display:grid;place-items:center}
-.teacher-photo .placeholder{margin:20px;border:1px dashed #bbb;background:#f9f9f7}
-.teacher-info{padding:18px}
-.teacher-info h3{font-size:18px}
-.teacher-info p{font-size:13px;color:var(--muted);margin-top:5px}
-.story{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.story-card{background:var(--soft);border-radius:20px;padding:30px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid rgba(26,89,53,0.1)}
-.story-card blockquote{font-size:25px;line-height:1.1;letter-spacing:-1px;color:var(--dark)}
-.story-card small{color:var(--muted);font-weight:600}
-.cta{padding:85px 0;text-align:center}
-.cta h2{font-size:clamp(42px,6vw,78px);letter-spacing:-4px;line-height:.95;max-width:760px;margin:auto;color:var(--accent)}
-.cta p{color:var(--muted);max-width:500px;margin:20px auto 28px}
-footer{background:var(--dark);color:#fff;padding:55px 0 30px}
-.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
-footer h3{font-size:26px;letter-spacing:-1px;color:var(--white)}
-footer p,footer a{font-size:13px;color:#cbdad0}
-footer a:hover{color:var(--accent2)}
-footer h4{font-size:13px;margin-bottom:14px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px}
-.footer-links{display:grid;gap:8px}
-.copyright{border-top:1px solid #1e3d2a;margin-top:45px;padding-top:20px;color:#8fa396;font-size:12px}
-@media(max-width:850px){
- .navlinks{display:none}.hero-grid,.test-grid,.story{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.teacher{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}.hero-art{min-height:350px}
-}
-@media(max-width:560px){
- .container{padding:0 18px}.cards,.teacher,.footer-grid{grid-template-columns:1fr}.hero h1{letter-spacing:-3px}.section-head{display:block}.section-head p{margin-top:18px}.hero{padding-top:60px}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmailJS Setup</title>
+
+  <!-- EmailJS SDK ကို ချိတ်ဆက်ခြင်း -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function() {
+      // သင်၏ Public Key ဖြင့် Init လုပ်ခြင်း
+      emailjs.init("hhfDn5aZiTq8y85Eb");
+    })();
+  </script>
 </head>
 <body>
 
-<nav>
-  <div class="container" style="display:flex;align-items:center;justify-content:space-between;width:100%">
-    <a class="logo" href="#" style="display:flex; align-items:center; height:80px; overflow:hidden;">
-  <img src="logo.jpg" alt="ICONIC Learning Centre" style="height:135px; width:auto; object-fit:contain; margin-top:-5px; margin-bottom:-5px;">
-</a>
-    <div class="navlinks">
-      <a href="#about">About</a>
-      <a href="#universe">ICONIC Universe</a>
-      <a href="#teachers">Teachers</a>
-      <a href="#connect">ICONIC Connect</a>
-      <a href="#insights">Insights</a>
-    </div>
-    <a class="btn dark" href="#placement">Take Placement Test</a>
-  </div>
-</nav>
+  <h2>Contact Form</h2>
 
-<header class="hero">
-  <div class="container hero-grid">
-    <div>
-      <div class="eyebrow">A future-focused English learning community</div>
-      <h1>Empowering Learners, <em>Shaping Futures.</em></h1>
-      <p>Build your English. Grow your confidence. Prepare for the future.</p>
-      <div class="hero-actions">
-        <a class="btn dark" href="#universe">Explore ICONIC Universe →</a>
-        <a class="btn light" href="#placement">Find Your Level</a>
-      </div>
-    </div>
-    <div class="hero-art">
-      <div class="orb"></div><div class="orb2"></div>
-      <div style="position:relative;z-index:2;font-size:13px;letter-spacing:1px;font-weight:700">YOUR JOURNEY STARTS HERE</div>
-      <div class="hero-card">
-        <div class="tag">ICONIC JOURNEY</div>
-        <h3>Discover where you are.<br>Decide where you want to go.</h3>
-        <p>Then build the skills to get there.</p>
-      </div>
-    </div>
-  </div>
-</header>
+  <!-- Form Setup (input 'name' attribute များသည် EmailJS Template Variables များနှင့် တူရပါမည်) -->
+  <form id="contact-form">
+    <label for="user_name">Name:</label><br>
+    <input type="text" id="user_name" name="user_name" required><br><br>
 
-<section id="about">
-  <div class="container">
-    <div class="section-head">
-      <h2>English is more than a subject.</h2>
-      <p>At ICONIC, we help learners develop the skills, confidence, and mindset they need for their next chapter.</p>
-    </div>
-    <div class="cards">
-      <div class="card"><div class="icon">↗</div><h3>Growth</h3><p>Learn at your level and keep moving forward.</p></div>
-      <div class="card"><div class="icon">◎</div><h3>Confidence</h3><p>Use English with greater confidence in real situations.</p></div>
-      <div class="card"><div class="icon">✦</div><h3>Opportunity</h3><p>Build skills that support your academic and future goals.</p></div>
-    </div>
-  </div>
-</section>
+    <label for="user_email">Email:</label><br>
+    <input type="email" id="user_email" name="user_email" required><br><br>
 
-<section id="universe" class="dark-section">
-  <div class="container">
-    <div class="section-head">
-      <h2>Welcome to the ICONIC Universe.</h2>
-      <p>One learning universe. Multiple pathways. Your future journey starts here.</p>
-    </div>
-    <div class="cards">
-      <div class="card program-card">
-        <div><div class="tag">GENERAL ENGLISH</div><h3>English Level Up</h3><p>Build a strong English foundation and progress through your learning journey.</p></div>
-        <div class="levels"><span class="level">A1</span><span class="level">A2</span><span class="level">B1</span><span class="level">B2</span><span class="level">C1</span></div>
-      </div>
-      <div class="card program-card">
-        <div><div class="tag">EXAM PREPARATION</div><h3>Exam Prep</h3><p>Prepare strategically for internationally recognized English tests.</p></div>
-        <div class="levels"><span class="level">IELTS</span><span class="level">DET</span></div>
-      </div>
-      <div class="card program-card">
-        <div><div class="tag">COMING SOON</div><h3>Future Pathways</h3><p>Academic English, scholarship preparation, career English, and more.</p></div>
-        <a class="btn dark" href="#contact" style="background:var(--accent2);border-color:var(--accent2)">Explore Future Programs →</a>
-      </div>
-    </div>
-  </div>
-</section>
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" required></textarea><br><br>
 
-<section id="placement" class="test-section">
-  <div class="container test-grid">
-    <div>
-      <div class="eyebrow" style="color:#fff; opacity:0.9;">Not sure where to start?</div>
-      <h2>Find the right path for your English journey.</h2>
-      <p>Take our placement test to understand your current level and discover the ICONIC pathway that fits your goals.</p>
-      <a class="btn dark" href="#contact" style="background:var(--dark);border-color:var(--dark)">Start Placement Test →</a>
-    </div>
-    <div class="test-box">
-      <h3>Your journey in 4 steps</h3>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div><strong>Take the Test</strong><span>Complete your English assessment.</span></div></div>
-        <div class="step"><div class="step-num">2</div><div><strong>Discover Your Level</strong><span>Understand where you are now.</span></div></div>
-        <div class="step"><div class="step-num">3</div><div><strong>Get Your Recommendation</strong><span>Find the learning pathway for your goals.</span></div></div>
-        <div class="step"><div class="step-num">4</div><div><strong>Start Your ICONIC Journey</strong><span>Take the next step with confidence.</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
+    <button type="submit">Send Email</button>
+  </form>
 
-<section id="teachers">
-  <div class="container">
-    <div class="section-head">
-      <h2>Meet the people behind your journey.</h2>
-      <p>Our teachers bring knowledge, experience, and a genuine commitment to student growth.</p>
-    </div>
-    <div class="teacher">
-      <div class="teacher-card"><div class="teacher-photo"><div class="placeholder">TEACHER PHOTO</div></div><div class="teacher-info"><h3>Teacher Name</h3><p>English Language Instructor</p></div></div>
-      <div class="teacher-card"><div class="teacher-photo"><div class="placeholder">TEACHER PHOTO</div></div><div class="teacher-info"><h3>Teacher Name</h3><p>English Language Instructor</p></div></div>
-      <div class="teacher-card"><div class="teacher-photo"><div class="placeholder">TEACHER PHOTO</div></div><div class="teacher-info"><h3>Teacher Name</h3><p>English Language Instructor</p></div></div>
-      <div class="teacher-card"><div class="teacher-photo"><div class="placeholder">TEACHER PHOTO</div></div><div class="teacher-info"><h3>Teacher Name</h3><p>English Language Instructor</p></div></div>
-    </div>
-  </div>
-</section>
+  <script type="text/javascript">
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Form ပုံမှန် Submit လုပ်ပြီး Refresh ဖြစ်သွားတာကို တားဆီးခြင်း
 
-<section id="connect">
-  <div class="container">
-    <div class="section-head">
-      <h2>Stay connected with every step of our journey.</h2>
-      <p>Discover webinars, partnerships, events, announcements, and new opportunities happening across the ICONIC Universe.</p>
-    </div>
+      const serviceID = 'service_co1k8t1';
+      const templateID = 'template_s4oaq5m';
 
-    <div class="cards">
-      <div class="card">
-        <div class="tag" style="color:var(--accent2)">WEBINARS</div>
-        <div class="placeholder" style="height:150px;display:grid;place-items:center;margin-bottom:20px">EVENT IMAGE / VIDEO PLACEHOLDER</div>
-        <h3>Teen's Future</h3>
-        <p>Webinars and conversations about academic pathways, future opportunities, and career development.</p>
-        <a class="btn light" style="margin-top:20px" href="#">Learn More →</a>
-      </div>
-
-      <div class="card">
-        <div class="tag" style="color:var(--accent2)">PARTNERSHIPS</div>
-        <div class="placeholder" style="height:150px;display:grid;place-items:center;margin-bottom:20px">MOU SIGNING PHOTO PLACEHOLDER</div>
-        <h3>New Partnerships</h3>
-        <p>Explore ICONIC's collaborations and partnerships that create new opportunities for learners.</p>
-        <a class="btn light" style="margin-top:20px" href="#">Read More →</a>
-      </div>
-
-      <div class="card">
-        <div class="tag" style="color:var(--accent2)">NEW STEPS</div>
-        <div class="placeholder" style="height:150px;display:grid;place-items:center;margin-bottom:20px">ANNOUNCEMENT IMAGE PLACEHOLDER</div>
-        <h3>A New Chapter Begins</h3>
-        <p>Follow our latest announcements, new programs, milestones, and exciting developments.</p>
-        <a class="btn light" style="margin-top:20px" href="#">Discover More →</a>
-      </div>
-    </div>
-
-    <div style="margin-top:22px;padding:30px;border-radius:20px;background:var(--soft);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
-      <div>
-        <div class="tag" style="background:var(--accent); color:#fff;">ICONIC CONNECT</div>
-        <h3 style="font-size:28px;letter-spacing:-1px">Something new is happening.</h3>
-        <p style="color:var(--muted);margin-top:6px">Stay updated with the latest ICONIC news and opportunities.</p>
-      </div>
-      <a class="btn dark" href="#">View All Updates →</a>
-    </div>
-  </div>
-</section>
-
-<section id="insights" class="dark-section">
-  <div class="container">
-    <div class="section-head">
-      <h2>Real journeys. Real growth.</h2>
-      <p>Student stories, learning insights, and ideas to help you move forward.</p>
-    </div>
-    <div class="story">
-      <div class="story-card"><blockquote>“I became more confident using English in my everyday life.”</blockquote><small>— Student Story Placeholder</small></div>
-      <div class="story-card"><blockquote>“The right learning path made my goals feel more achievable.”</blockquote><small>— Student Story Placeholder</small></div>
-    </div>
-  </div>
-</section>
-
-<section class="cta" id="contact">
-  <div class="container">
-    <h2>Ready to start your ICONIC journey?</h2>
-    <p>Discover your level, explore your pathway, and take your next step with us.</p>
-    <a class="btn dark" href="#">Contact ICONIC →</a>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div><h3>ICONIC Learning Centre</h3><p style="margin-top:12px;max-width:260px;color:#a3bdae;">Learn English. Build confidence. Shape your future.</p></div>
-      <div><h4>Explore</h4><div class="footer-links"><a href="#about">About Us</a><a href="#universe">ICONIC Universe</a><a href="#teachers">Teachers</a><a href="#connect">ICONIC Connect</a></div></div>
-      <div><h4>Learn</h4><div class="footer-links"><a href="#placement">Placement Test</a><a href="#insights">Student Stories</a><a href="#insights">Insights</a></div></div>
-      <div><h4>Connect</h4><div class="footer-links"><a href="https://www.facebook.com/profile.php?id=61591023549784">Facebook</a><a href="#">Messenger</a><a href="#">Contact Us</a></div></div>
-    </div>
-    <div class="copyright">© 2026 ICONIC Learning Centre. All rights reserved.</div>
-  </div>
-</footer>
+      // Form ၏ အချက်အလက်များကို EmailJS သို့ ပို့ဆောင်ခြင်း
+      emailjs.sendForm(serviceID, templateID, this)
+        .then(() => {
+          alert('Email ပို့ဆောင်မှု အောင်မြင်ပါသည်။');
+          document.getElementById('contact-form').reset(); // Form ကို ပြန်ရှင်းခြင်း
+        }, (error) => {
+          alert('FAILED... ' + JSON.stringify(error));
+        });
+    });
+  </script>
 
 </body>
 </html>
