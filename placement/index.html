@@ -5,6 +5,23 @@
 
   <!-- Load Questions -->
   <script src="./questions.js"> </script>
+  
+  <script>
+  const form = document.getElementById("testForm");
+
+  questions.forEach((q, index) => {
+    let html = `<p>${index + 1}. ${q.q}</p>`;
+    q.options.forEach((opt, i) => {
+      html += `
+        <label>
+          <input type="radio" name="q${index}" value="${i}">
+          ${opt}
+        </label><br>
+      `;
+    });
+    form.innerHTML += html + "<hr>";
+  });
+</script>
 
   <!-- EmailJS -->
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
