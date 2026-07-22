@@ -9,18 +9,17 @@
   --ink:#171717;
   --muted:#6e6e6e;
   --line:#e8e8e8;
-  --soft:#f2f7f4;
-  --accent:#1a5935;
-  --accent2:#bd1e1e;
-  --dark:#122b1c;
+  --soft:#f2f7f4;            /* Soft light greenish-gray background */
+  --accent:#1a5935;          /* ICONIC Primary Dark Green */
+  --accent2:#bd1e1e;         /* ICONIC Accent Red */
+  --dark:#122b1c;            /* Deep Forest Dark for sections */
   --white:#fff;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Inter,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.5}
 a{text-decoration:none;color:inherit}
 .container{max-width:1180px;margin:auto;padding:0 28px}
-nav{height:95px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);z-index:10}
-.navlinks{display:flex;gap:27px;font-size:14px;color:#444}
+nav{height:95px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);z-index:10}  .navlinks{display:flex;gap:27px;font-size:14px;color:#444}
 .navlinks a:hover{color:var(--accent)}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:999px;font-size:14px;font-weight:700;border:1px solid var(--ink);transition:.2s}
 .btn.dark{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -35,27 +34,88 @@ nav{height:95px;display:flex;align-items:center;justify-content:space-between;bo
 .hero h1 em{font-style:normal;color:var(--accent2)}
 .hero p{font-size:18px;color:#555;max-width:530px;margin:28px 0}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-
-/* Placement Test UI */
-.page-view{display:none}
-.page-view.active{display:block}
-.input-field{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;margin-bottom:15px}
-.progress-bar-container{width:100%;background:#e0e0e0;height:10px;border-radius:10px;margin-bottom:20px}
-.progress-bar{height:100%;background:var(--accent);width:0%;border-radius:10px}
-.question-card{margin-bottom:25px;padding-bottom:15px;border-bottom:1px solid #eee}
-.question-title{font-size:18px;font-weight:700;margin-bottom:10px}
-.options-list{list-style:none;padding:0}
-.options-list label{display:flex;padding:10px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;cursor:pointer}
+.hero-art{min-height:430px;background:var(--dark);border-radius:28px;position:relative;overflow:hidden;padding:30px;color:#fff}
+.hero-art .orb{position:absolute;width:310px;height:310px;border-radius:50%;background:var(--accent);right:-80px;top:-60px;opacity:0.6}
+.hero-art .orb2{position:absolute;width:150px;height:150px;border-radius:50%;background:var(--accent2);left:-40px;bottom:-30px;opacity:0.4}
+.hero-card{position:absolute;left:30px;right:30px;bottom:30px;background:#fff;color:var(--ink);border-radius:20px;padding:24px;z-index:2;box-shadow:0 15px 30px rgba(0,0,0,0.15)}
+.hero-card h3{font-size:27px;line-height:1.05;letter-spacing:-1px;margin-bottom:10px}
+.hero-card p{font-size:14px;color:#666;margin:0}
+.hero-card .tag{background:var(--soft);color:var(--accent)}
+section{padding:95px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:42px}
+.section-head h2{font-size:clamp(36px,5vw,62px);line-height:.98;letter-spacing:-3px;max-width:600px}
+.section-head p{max-width:390px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{border:1px solid var(--line);border-radius:20px;padding:27px;background:#fff}
+.card:hover{box-shadow:0 12px 35px rgba(0,0,0,.07);transform:translateY(-3px);transition:.25s;border-color:var(--accent)}
+.icon{font-size:34px;margin-bottom:30px;color:var(--accent2)}
+.card h3{font-size:24px;letter-spacing:-1px;margin-bottom:10px}
+.card p{color:var(--muted);font-size:14px}
+.tag{display:inline-block;padding:6px 10px;border-radius:999px;background:#f1f1f1;font-size:11px;font-weight:800;margin-bottom:18px;letter-spacing:0.5px}
+.dark-section{background:var(--dark);color:#fff}
+.dark-section .section-head p,.dark-section .card p{color:#b8b8b8}
+.dark-section .card{background:#1a3324;border-color:#254431}
+.program-card{min-height:320px;display:flex;flex-direction:column;justify-content:space-between}
+.program-card:nth-child(1){background:var(--accent);color:#fff}
+.program-card:nth-child(1) .tag{background:rgba(255,255,255,0.15);color:#fff}
+.program-card:nth-child(1) p{color:#e0ece5}
+.program-card:nth-child(2){background:var(--soft);color:var(--ink);border-color:var(--line)}
+.program-card:nth-child(2) .tag{background:var(--accent2);color:#fff}
+.program-card:nth-child(3){background:#1d1d1b;color:#fff;border-color:#2d2d2a}
+.program-card:nth-child(3) .tag{background:rgba(255,255,255,0.1);color:#aaa}
+.levels{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.level{padding:8px 11px;border:1px solid rgba(0,0,0,.15);border-radius:999px;font-size:12px;font-weight:700}
+.program-card:nth-child(1) .level{border-color:rgba(255,255,255,0.3)}
+.test-section{background:var(--accent2);padding:80px 0;color:#fff}
+.test-section h2{color:#fff}
+.test-section p{color:#f5d7d7}
+.test-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.test-grid h2{font-size:clamp(38px,5vw,65px);line-height:.95;letter-spacing:-3px}
+.test-grid p{margin:20px 0;max-width:500px}
+.test-box{background:#fff;border-radius:22px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.08);color:var(--ink)}
+.test-box h3{font-size:24px;margin-bottom:20px}
+.steps{display:grid;gap:14px}
+.step{display:flex;gap:15px;align-items:flex-start}
+.step-num{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800;flex:none}
+.step strong{display:block;font-size:15px}
+.step span{font-size:13px;color:var(--muted)}
+.teacher{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.teacher-card{border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.teacher-photo{height:230px;background:#eaeae7;display:grid;place-items:center}
+.teacher-photo .placeholder{margin:20px;border:1px dashed #bbb;background:#f9f9f7}
+.teacher-info{padding:18px}
+.teacher-info h3{font-size:18px}
+.teacher-info p{font-size:13px;color:var(--muted);margin-top:5px}
+.story{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.story-card{background:var(--soft);border-radius:20px;padding:30px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid rgba(26,89,53,0.1)}
+.story-card blockquote{font-size:25px;line-height:1.1;letter-spacing:-1px;color:var(--dark)}
+.story-card small{color:var(--muted);font-weight:600}
+.cta{padding:85px 0;text-align:center}
+.cta h2{font-size:clamp(42px,6vw,78px);letter-spacing:-4px;line-height:.95;max-width:760px;margin:auto;color:var(--accent)}
+.cta p{color:var(--muted);max-width:500px;margin:20px auto 28px}
+footer{background:var(--dark);color:#fff;padding:55px 0 30px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
+footer h3{font-size:26px;letter-spacing:-1px;color:var(--white)}
+footer p,footer a{font-size:13px;color:#cbdad0}
+footer a:hover{color:var(--accent2)}
+footer h4{font-size:13px;margin-bottom:14px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px}
+.footer-links{display:grid;gap:8px}
+.copyright{border-top:1px solid #1e3d2a;margin-top:45px;padding-top:20px;color:#8fa396;font-size:12px}
+@media(max-width:850px){
+ .navlinks{display:none}.hero-grid,.test-grid,.story{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.teacher{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}.hero-art{min-height:350px}
+}
+@media(max-width:560px){
+ .container{padding:0 18px}.cards,.teacher,.footer-grid{grid-template-columns:1fr}.hero h1{letter-spacing:-3px}.section-head{display:block}.section-head p{margin-top:18px}.hero{padding-top:60px}
+}
 </style>
 </head>
-
 <body>
 
 <nav>
   <div class="container" style="display:flex;align-items:center;justify-content:space-between;width:100%">
     <a class="logo" href="#" style="display:flex; align-items:center; height:80px; overflow:hidden;">
-      <img src="logo.jpg" alt="ICONIC Learning Centre" style="height:135px; width:auto; object-fit:contain; margin-top:-5px; margin-bottom:-5px;">
-    </a>
+  <img src="logo.jpg" alt="ICONIC Learning Centre" style="height:135px; width:auto; object-fit:contain; margin-top:-5px; margin-bottom:-5px;">
+</a>
     <div class="navlinks">
       <a href="#about">About</a>
       <a href="#universe">ICONIC Universe</a>
@@ -78,230 +138,166 @@ nav{height:95px;display:flex;align-items:center;justify-content:space-between;bo
         <a class="btn light" href="#placement">Find Your Level</a>
       </div>
     </div>
-<!-- ============================
-     FIRST PLACEMENT SECTION (RED)
-     + EMBEDDED FULL TEST UI
-============================ -->
-<section id="placement" class="test-section" style="background:var(--accent2);padding:80px 0;color:#fff;">
-  <div class="container">
-    <div class="eyebrow" style="color:#fff; opacity:0.9;">Not sure where to start?</div>
-    <h2 style="color:#fff;">Find the right path for your English journey.</h2>
-    <p style="color:#f5d7d7;">Take our placement test to understand your current level and discover the ICONIC pathway that fits your goals.</p>
+    <div class="hero-art">
+      <div class="orb"></div><div class="orb2"></div>
+      <div style="position:relative;z-index:2;font-size:13px;letter-spacing:1px;font-weight:700">YOUR JOURNEY STARTS HERE</div>
+      <div class="hero-card">
+        <div class="tag">ICONIC JOURNEY</div>
+        <h3>Discover where you are.<br>Decide where you want to go.</h3>
+        <p>Then build the skills to get there.</p>
+      </div>
+    </div>
   </div>
+</header>
 
-  <!-- ============================
-       EMBEDDED PLACEMENT TEST UI
-  ============================= -->
-  <div id="placement-test-ui" style="margin-top:40px;max-width:800px;margin:auto;">
-
-    <!-- PAGE 1: USER INFO -->
-    <div id="page-welcome" class="page-view active" style="background:#fff;padding:40px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.08);color:var(--ink);">
-      <h2 style="color:var(--accent);font-size:32px;margin-bottom:10px;">Start Your Placement Test</h2>
-      <p style="color:var(--muted);margin-bottom:25px;">Fill in your information to begin.</p>
-
-      <form id="user-info-form">
-        <input type="text" id="student_name" class="input-field" placeholder="Full Name" required>
-        <input type="email" id="student_email" class="input-field" placeholder="Email Address" required>
-        <input type="tel" id="student_phone" class="input-field" placeholder="Phone Number" required>
-        <button type="button" class="btn dark" onclick="startTest()">Start Test</button>
-      </form>
+<section id="about">
+  <div class="container">
+    <div class="section-head">
+      <h2>English is more than a subject.</h2>
+      <p>At ICONIC, we help learners develop the skills, confidence, and mindset they need for their next chapter.</p>
     </div>
-
-    <!-- PAGE 2: QUESTIONS -->
-    <div id="page-test" class="page-view" style="background:#fff;padding:40px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.08);color:var(--ink);">
-      <div class="progress-bar-container">
-        <div id="progress-bar" class="progress-bar"></div>
-      </div>
-
-      <h2 style="color:var(--accent);font-size:28px;margin-bottom:10px;">Placement Test</h2>
-      <span id="page-indicator" style="font-weight:bold;color:#666;">Page 1</span>
-
-      <div id="questions-container"></div>
-
-      <div style="display:flex;justify-content:space-between;margin-top:20px;">
-        <button id="prev-btn" class="btn light" onclick="changePage(-1)" style="display:none;">Previous</button>
-        <button id="next-btn" class="btn dark" onclick="changePage(1)">Next</button>
-        <button id="submit-btn" class="btn accent" onclick="submitTest()" style="display:none;">Submit</button>
-      </div>
+    <div class="cards">
+      <div class="card"><div class="icon">↗</div><h3>Growth</h3><p>Learn at your level and keep moving forward.</p></div>
+      <div class="card"><div class="icon">◎</div><h3>Confidence</h3><p>Use English with greater confidence in real situations.</p></div>
+      <div class="card"><div class="icon">✦</div><h3>Opportunity</h3><p>Build skills that support your academic and future goals.</p></div>
     </div>
-
-    <!-- PAGE 3: RESULT -->
-    <div id="page-result" class="page-view" style="background:#fff;padding:40px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.08);text-align:center;color:var(--ink);">
-      <h2 style="color:var(--accent);font-size:32px;">Thank You!</h2>
-      <p>Your test has been submitted successfully.</p>
-      <h3 id="score-display" style="margin-top:20px;font-size:26px;color:var(--accent2);"></h3>
-      <button class="btn dark" onclick="location.reload()">Restart</button>
-    </div>
-
   </div>
 </section>
 
-<!-- ============================
-     FULL 60 QUESTIONS ARRAY
-============================ -->
-<script>
-const questions = [
-  {id:1,text:"I ______ bus on Mondays.",options:["'m going to work with","'m going to work by","go to work with","go to work by"],answer:1},
-  {id:2,text:"Sorry, but this chair is ______.",options:["me","mine","my","our"],answer:1},
-  {id:3,text:"A: 'How old ______?' B: 'I ______.'",options:["are you / am 20 years old.","have you / have 20 years old","are you / am 20 years.","do you have / have 20 years."],answer:0},
-  {id:4,text:"I ______ to the cinema.",options:["not usually go","don't usually go","don't go usually","do not go usually"],answer:1},
-  {id:5,text:"Where ______ ?",options:["your sister works","your sister work","does your sister work","do your sister work"],answer:2},
-  {id:6,text:"The test is ______ February.",options:["in","at","on","over"],answer:0},
-  {id:7,text:"I eat pasta ______ week.",options:["twice in a","twice a","one time a","once in a"],answer:1},
-  {id:8,text:"I don't have ______ free time.",options:["many","any","a lot","some"],answer:1},
-  {id:9,text:"A: '_____ to the cinema tomorrow?'",options:["We will go","Do we go","We go","Shall we go"],answer:3},
-  {id:10,text:"We went to the market ______ some vegetables.",options:["to buy","for buy","for to buy","for buying"],answer:0},
-  {id:11,text:"Sorry, but when you called I ______ a shower.",options:["had","did have","was having","were having"],answer:2},
-  {id:12,text:"______ are very friendly and very intelligent.",options:["Dolphins","The dolphins","A dolphin","The dolphin"],answer:0},
-  {id:13,text:"Somebody stole ______ yesterday.",options:["the car of my mother","my car mother","my mother's car","my mother car"],answer:2},
-  {id:14,text:"______ with me?",options:["Do you like to dance","Would you like to dance","Do you like dance","Would you like dancing"],answer:1},
-  {id:15,text:"She is ______ her sister, I think.",options:["more happier than","more happy that","happier that","happier than"],answer:3},
-  {id:16,text:"I couldn't eat ______ before the exam.",options:["nothing","anything","everything","something"],answer:1},
-  {id:17,text:"Please, pass me the remote. ______ TV.",options:["I'm watching","I will watch","I'm going to watch","I might watch"],answer:0},
-  {id:18,text:"I'll call you when I ______ home.",options:["get","arrive","reach","come"],answer:0},
-  {id:19,text:"Have you ever ______ in London?",options:["gone","been","visited","stayed"],answer:1},
-  {id:20,text:"He drives very ______.",options:["fast","quick","quickly","slow"],answer:2},
-  {id:21,text:"Can you ______ the lights? I can't see.",options:["turn on","turn off","switch","open"],answer:0},
-  {id:22,text:"We couldn't find a taxi, ______ we walked home.",options:["so","because","but","although"],answer:0},
-  {id:23,text:"Tomorrow I ______ get up early; it's my day off.",options:["don't have to","must","should","need"],answer:0},
-  {id:24,text:"I ______ this coffee. It tastes horrible.",options:["don't like","can't drink","won't drink","hate"],answer:0},
-  {id:25,text:"We ______ yesterday.",options:["met","meet","have met","are meeting"],answer:0},
-  {id:26,text:"When I arrive home, I'm going to have a ______ bath.",options:["hot","relaxing","long","quick"],answer:0},
-  {id:27,text:"A: 'We don't have any milk.' B: 'Really? I ______ more.'",options:["will buy","am buying","buy","bought"],answer:0},
-  {id:28,text:"We ______ to seeing you next Thursday.",options:["look forward","are looking forward","look forwarded","are look forward"],answer:1},
-  {id:29,text:"I'd like to go ______ in the park.",options:["walking","walk","to walk","for walk"],answer:0},
-  {id:30,text:"German ______ in Germany, Austria and Switzerland.",options:["is spoken","speaks","spoken","is speaking"],answer:0},
-  {id:31,text:"I ______ your book. It's fantastic. I'll finish it tonight.",options:["am reading","read","have read","was reading"],answer:0},
-  {id:32,text:"He went on a business ______ to New York.",options:["trip","travel","journey","tour"],answer:0},
-  {id:33,text:"If I tell you a secret, ______ anyone?",options:["will you tell","do you tell","are you telling","won't you tell"],answer:0},
-  {id:34,text:"My brother and I don't ______ very well.",options:["get on","get","go","talk"],answer:0},
-  {id:35,text:"I ______ fifty pages, but I have to read fifty more.",options:["have read","read","am reading","was reading"],answer:0},
-  {id:36,text:"If I ______ you, I wouldn't do it.",options:["were","am","was","be"],answer:0},
-  {id:37,text:"This painting ______ a fortune.",options:["is worth","worth","cost","costs"],answer:0},
-  {id:38,text:"She is the same age ______ me.",options:["as","than","with","like"],answer:0},
-  {id:39,text:"It's obvious that you ______.",options:["don't drive as faster as me","drive faster than me","drive more fast than I","drive no faster than I"],answer:1},
-  {id:40,text:"The boat sank, but they ______ swim to the shore.",options:["were able to","could","can","are able to"],answer:0},
-  {id:41,text:"If I had known that she was there, I ______ hello.",options:["would have said","said","would say","say"],answer:0},
-  {id:42,text:"I think he ______ in prison for what he did.",options:["should be","must be","ought be","has to be"],answer:0},
-  {id:43,text:"He ______ him with his homework.",options:["told me to help","said me that I help","said me I help","told me that I help"],answer:0},
-  {id:44,text:"We ______. We hired a very good interior designer.",options:["redecorated the kitchen","had redecorated the kitchen","got redecorated the kitchen","had the kitchen redecorated"],answer:3},
-  {id:45,text:"A: 'I had a sauna yesterday.' B: '______? That's great.'",options:["Did you","Have you","Do you","Are you"],answer:0},
-  {id:46,text:"I wonder ______ at the party.",options:["who was she talking","who she was talking to","who was she talking to","who she was talking"],answer:1},
-  {id:47,text:"______ the wiser they become.",options:["How older people are","If older people are","The more old the people","The older people are"],answer:3},
-  {id:48,text:"I bought a ______ jacket.",options:["leather","brown","new","expensive"],answer:0},
-  {id:49,text:"By 2050 we ______ the cure for type 1 diabetes.",options:["will be discovering","are discovering","are going to be discovering","will have discovered"],answer:3},
-  {id:50,text:"The building ______.",options:["was damaged in the hurricane badly last year","was badly damaged last year in the hurricane","was badly damaged in the hurricane last year","last year was damaged badly in the hurricane"],answer:2},
-  {id:51,text:"If only he ______ doing that. It's so annoying!",options:["would stop","stops","stop","will stop"],answer:0},
-  {id:52,text:"If my parents hadn't met, I ______ here now.",options:["wouldn't be","won't be","am not","wasn't"],answer:0},
-  {id:53,text:"I like the job, but I think it'll be difficult to ______ nights.",options:["be used to working","uses to work","get used to working","get used to work"],answer:2},
-  {id:54,text:"You ______ me immediately. Now it's too late.",options:["should have called","should call","call","called"],answer:0},
-  {id:55,text:"Not only ______ you, but he also lied to you.",options:["did he cheat","he cheated","cheated he","did cheat he"],answer:0},
-  {id:56,text:"______ should be angry, not you.",options:["I","Me","They","He"],answer:2},
-  {id:57,text:"I ______ you, but I forgot.",options:["was going to call","am calling","call","called"],answer:0},
-  {id:58,text:"It's ______ to Paris.",options:["a two hours journey","two hours' journey","a two hour's journey","a two-hours journey"],answer:1},
-  {id:59,text:"They ______ to arrive next Friday.",options:["are expected","expect","are expecting","expected"],answer:0},
-  {id:60,text:"I didn't want to do it in the past, but now I ______.",options:["do","will","am","can"],answer:0}
-];
-<!-- ============================
-     PLACEMENT TEST LOGIC
-============================ -->
-<script>
-const QUESTIONS_PER_PAGE = 5;
-let currentPage = 0;
-let userAnswers = {};
-let studentData = {};
+<section id="universe" class="dark-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Welcome to the ICONIC Universe.</h2>
+      <p>One learning universe. Multiple pathways. Your future journey starts here.</p>
+    </div>
+    <div class="cards">
+      <div class="card program-card">
+        <div><div class="tag">GENERAL ENGLISH</div><h3>English Level Up</h3><p>Build a strong English foundation and progress through your learning journey.</p></div>
+        <div class="levels"><span class="level">A1</span><span class="level">A2</span><span class="level">B1</span><span class="level">B2</span><span class="level">C1</span></div>
+      </div>
+      <div class="card program-card">
+        <div><div class="tag">EXAM PREPARATION</div><h3>Exam Prep</h3><p>Prepare strategically for internationally recognized English tests.</p></div>
+        <div class="levels"><span class="level">IELTS</span><span class="level">DET</span></div>
+      </div>
+      <div class="card program-card">
+        <div><div class="tag">COMING SOON</div><h3>Future Pathways</h3><p>Academic English, scholarship preparation, career English, and more.</p></div>
+        <a class="btn dark" href="#contact" style="background:var(--accent2);border-color:var(--accent2)">Explore Future Programs →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-function showPage(id) {
-    document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-}
+<section id="placement" class="test-section">
+  <div class="container test-grid">
+    <div>
+      <div class="eyebrow" style="color:#fff; opacity:0.9;">Not sure where to start?</div>
+      <h2>Find the right path for your English journey.</h2>
+      <p>Take our placement test to understand your current level and discover the ICONIC pathway that fits your goals.</p>
+      <a class="btn dark" href="#contact" style="background:var(--dark);border-color:var(--dark)">Start Placement Test →</a>
+    </div>
+    <div class="test-box">
+      <h3>Your journey in 4 steps</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div><strong>Take the Test</strong><span>Complete your English assessment.</span></div></div>
+        <div class="step"><div class="step-num">2</div><div><strong>Discover Your Level</strong><span>Understand where you are now.</span></div></div>
+        <div class="step"><div class="step-num">3</div><div><strong>Get Your Recommendation</strong><span>Find the learning pathway for your goals.</span></div></div>
+        <div class="step"><div class="step-num">4</div><div><strong>Start Your ICONIC Journey</strong><span>Take the next step with confidence.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-function startTest() {
-    const name = studentData.name = document.getElementById("student_name").value.trim();
-    const email = studentData.email = document.getElementById("student_email").value.trim();
-    const phone = studentData.phone = document.getElementById("student_phone").value.trim();
+<section id="teachers">
+  <div class="container">
+    <div class="section-head">
+      <h2>Meet the people behind your journey.</h2>
+      <p>Our teachers bring knowledge, experience, and a genuine commitment to student growth.</p>
+    </div>
+    <div class="teacher">
+      <div class="teacher-card"><div class="teacher-photo"><div class="placeholder">TEACHER PHOTO</div></div><div class="teacher-info"><h3>Teacher Name</h3><p>English Language Instructor</p></div></div>
+      <div class="teacher-card"><div class="teacher-photo"><div class="placeholder">TEACHER PHOTO</div></div><div class="teacher-info"><h3>Teacher Name</h3><p>English Language Instructor</p></div></div>
+      <div class="teacher-card"><div class="teacher-photo"><div class="placeholder">TEACHER PHOTO</div></div><div class="teacher-info"><h3>Teacher Name</h3><p>English Language Instructor</p></div></div>
+      <div class="teacher-card"><div class="teacher-photo"><div class="placeholder">TEACHER PHOTO</div></div><div class="teacher-info"><h3>Teacher Name</h3><p>English Language Instructor</p></div></div>
+    </div>
+  </div>
+</section>
 
-    if (!name || !email || !phone) {
-        alert("Please fill all fields.");
-        return;
-    }
+<section id="connect">
+  <div class="container">
+    <div class="section-head">
+      <h2>Stay connected with every step of our journey.</h2>
+      <p>Discover webinars, partnerships, events, announcements, and new opportunities happening across the ICONIC Universe.</p>
+    </div>
 
-    showPage("page-test");
-    renderQuestions();
-}
+    <div class="cards">
+      <div class="card">
+        <div class="tag" style="color:var(--accent2)">WEBINARS</div>
+        <div class="placeholder" style="height:150px;display:grid;place-items:center;margin-bottom:20px">EVENT IMAGE / VIDEO PLACEHOLDER</div>
+        <h3>Teen's Future</h3>
+        <p>Webinars and conversations about academic pathways, future opportunities, and career development.</p>
+        <a class="btn light" style="margin-top:20px" href="#">Learn More →</a>
+      </div>
 
-function renderQuestions() {
-    const container = document.getElementById("questions-container");
-    container.innerHTML = "";
+      <div class="card">
+        <div class="tag" style="color:var(--accent2)">PARTNERSHIPS</div>
+        <div class="placeholder" style="height:150px;display:grid;place-items:center;margin-bottom:20px">MOU SIGNING PHOTO PLACEHOLDER</div>
+        <h3>New Partnerships</h3>
+        <p>Explore ICONIC's collaborations and partnerships that create new opportunities for learners.</p>
+        <a class="btn light" style="margin-top:20px" href="#">Read More →</a>
+      </div>
 
-    const start = currentPage * QUESTIONS_PER_PAGE;
-    const end = Math.min(start + QUESTIONS_PER_PAGE, questions.length);
-    const pageQuestions = questions.slice(start, end);
+      <div class="card">
+        <div class="tag" style="color:var(--accent2)">NEW STEPS</div>
+        <div class="placeholder" style="height:150px;display:grid;place-items:center;margin-bottom:20px">ANNOUNCEMENT IMAGE PLACEHOLDER</div>
+        <h3>A New Chapter Begins</h3>
+        <p>Follow our latest announcements, new programs, milestones, and exciting developments.</p>
+        <a class="btn light" style="margin-top:20px" href="#">Discover More →</a>
+      </div>
+    </div>
 
-    pageQuestions.forEach(q => {
-        const div = document.createElement("div");
-        div.className = "question-card";
+    <div style="margin-top:22px;padding:30px;border-radius:20px;background:var(--soft);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
+      <div>
+        <div class="tag" style="background:var(--accent); color:#fff;">ICONIC CONNECT</div>
+        <h3 style="font-size:28px;letter-spacing:-1px">Something new is happening.</h3>
+        <p style="color:var(--muted);margin-top:6px">Stay updated with the latest ICONIC news and opportunities.</p>
+      </div>
+      <a class="btn dark" href="#">View All Updates →</a>
+    </div>
+  </div>
+</section>
 
-        let optionsHTML = "";
-        q.options.forEach((opt, idx) => {
-            const checked = userAnswers[q.id] === idx ? "checked" : "";
-            optionsHTML += `
-                <li>
-                    <label>
-                        <input type="radio" name="q_${q.id}" value="${idx}" ${checked}
-                        onchange="saveAnswer(${q.id}, ${idx})">
-                        ${opt}
-                    </label>
-                </li>`;
-        });
+<section id="insights" class="dark-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Real journeys. Real growth.</h2>
+      <p>Student stories, learning insights, and ideas to help you move forward.</p>
+    </div>
+    <div class="story">
+      <div class="story-card"><blockquote>“I became more confident using English in my everyday life.”</blockquote><small>— Student Story Placeholder</small></div>
+      <div class="story-card"><blockquote>“The right learning path made my goals feel more achievable.”</blockquote><small>— Student Story Placeholder</small></div>
+    </div>
+  </div>
+</section>
 
-        div.innerHTML = `
-            <div class="question-title">${q.id}. ${q.text}</div>
-            <ul class="options-list">${optionsHTML}</ul>
-        `;
-        container.appendChild(div);
-    });
+<section class="cta" id="contact">
+  <div class="container">
+    <h2>Ready to start your ICONIC journey?</h2>
+    <p>Discover your level, explore your pathway, and take your next step with us.</p>
+    <a class="btn dark" href="#">Contact ICONIC →</a>
+  </div>
+</section>
 
-    const totalPages = Math.ceil(questions.length / QUESTIONS_PER_PAGE);
-    document.getElementById("page-indicator").innerText =
-        `Page ${currentPage + 1} of ${totalPages}`;
-
-    document.getElementById("prev-btn").style.display =
-        currentPage === 0 ? "none" : "inline-block";
-
-    if (currentPage === totalPages - 1) {
-        document.getElementById("next-btn").style.display = "none";
-        document.getElementById("submit-btn").style.display = "inline-block";
-    } else {
-        document.getElementById("next-btn").style.display = "inline-block";
-        document.getElementById("submit-btn").style.display = "none";
-    }
-
-    document.getElementById("progress-bar").style.width =
-        ((currentPage + 1) / totalPages) * 100 + "%";
-}
-
-function saveAnswer(qId, idx) {
-    userAnswers[qId] = idx;
-}
-
-function changePage(dir) {
-    currentPage += dir;
-    renderQuestions();
-}
-
-function submitTest() {
-    let score = 0;
-    questions.forEach(q => {
-        if (userAnswers[q.id] === q.answer) score++;
-    });
-
-    document.getElementById("score-display").innerText =
-        `Your Score: ${score} / ${questions.length}`;
-
-    showPage("page-result");
-}
-</script>
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><h3>ICONIC Learning Centre</h3><p style="margin-top:12px;max-width:260px;color:#a3bdae;">Learn English. Build confidence. Shape your future.</p></div>
+      <div><h4>Explore</h4><div class="footer-links"><a href="#about">About Us</a><a href="#universe">ICONIC Universe</a><a href="#teachers">Teachers</a><a href="#connect">ICONIC Connect</a></div></div>
+      <div><h4>Learn</h4><div class="footer-links"><a href="#placement">Placement Test</a><a href="#insights">Student Stories</a><a href="#insights">Insights</a></div></div>
+      <div><h4>Connect</h4><div class="footer-links"><a href="https://www.facebook.com/profile.php?id=61591023549784">Facebook</a><a href="#">Messenger</a><a href="#">Contact Us</a></div></div>
+    </div>
+    <div class="copyright">© 2026 ICONIC Learning Centre. All rights reserved.</div>
+  </div>
+</footer>
 
 </body>
 </html>
