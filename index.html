@@ -6,15 +6,17 @@
 <title>ICONIC Learning Centre</title>
 
 <!-- EmailJS SDK -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script type="text/javascript">
-   (function(){
-      // TODO: Replace with your actual EmailJS Public Key
-      emailjs.init("YOUR_PUBLIC_KEY");
-   })();
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function() {
+    emailjs.init("hhfDn5aZiTq8y85Eb");
+})();
 </script>
 
 <style>
+/* ============================
+   ICONIC GLOBAL STYLES
+============================ */
 :root{
   --ink:#171717;
   --muted:#6e6e6e;
@@ -29,16 +31,21 @@
 body{font-family:Inter,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.5}
 a{text-decoration:none;color:inherit}
 .container{max-width:1180px;margin:auto;padding:0 28px}
-nav{height:95px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);z-index:10}
-.logo img{height:135px;width:auto;object-fit:contain;margin-top:-5px;margin-bottom:-5px;}
+
+/* NAV */
+nav{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);z-index:10}
+.logo{font-size:25px;font-weight:900;letter-spacing:-1.5px;color:var(--accent)}
+.logo span{font-weight:400;color:var(--ink)}
 .navlinks{display:flex;gap:27px;font-size:14px;color:#444}
 .navlinks a:hover{color:var(--accent)}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:999px;font-size:14px;font-weight:700;border:1px solid var(--ink);transition:.2s;cursor:pointer;}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:999px;font-size:14px;font-weight:700;border:1px solid var(--ink);transition:.2s}
 .btn.dark{background:var(--accent);color:#fff;border-color:var(--accent)}
 .btn.light{background:#fff;border-color:var(--line)}
 .btn.light:hover{border-color:var(--accent);color:var(--accent)}
 .btn.accent{background:var(--accent2);border-color:var(--accent2);color:#fff}
 .btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+
+/* HERO */
 .hero{padding:85px 0 70px;background:var(--soft);overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
 .eyebrow{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;color:var(--accent)}
@@ -46,102 +53,72 @@ nav{height:95px;display:flex;align-items:center;justify-content:space-between;bo
 .hero h1 em{font-style:normal;color:var(--accent2)}
 .hero p{font-size:18px;color:#555;max-width:530px;margin:28px 0}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-.hero-art{min-height:430px;background:var(--dark);border-radius:28px;position:relative;overflow:hidden;padding:30px;color:#fff}
-.hero-art .orb{position:absolute;width:310px;height:310px;border-radius:50%;background:var(--accent);right:-80px;top:-60px;opacity:0.6}
-.hero-art .orb2{position:absolute;width:150px;height:150px;border-radius:50%;background:var(--accent2);left:-40px;bottom:-30px;opacity:0.4}
-.hero-card{position:absolute;left:30px;right:30px;bottom:30px;background:#fff;color:var(--ink);border-radius:20px;padding:24px;z-index:2;box-shadow:0 15px 30px rgba(0,0,0,0.15)}
-.hero-card h3{font-size:27px;line-height:1.05;letter-spacing:-1px;margin-bottom:10px}
-.hero-card p{font-size:14px;color:#666;margin:0}
-.hero-card .tag{background:var(--soft);color:var(--accent)}
-section{padding:95px 0}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:42px}
-.section-head h2{font-size:clamp(36px,5vw,62px);line-height:.98;letter-spacing:-3px;max-width:600px}
-.section-head p{max-width:390px;color:var(--muted)}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{border:1px solid var(--line);border-radius:20px;padding:27px;background:#fff}
-.card:hover{box-shadow:0 12px 35px rgba(0,0,0,.07);transform:translateY(-3px);transition:.25s;border-color:var(--accent)}
-.icon{font-size:34px;margin-bottom:30px;color:var(--accent2)}
-.card h3{font-size:24px;letter-spacing:-1px;margin-bottom:10px}
-.card p{color:var(--muted);font-size:14px}
-.tag{display:inline-block;padding:6px 10px;border-radius:999px;background:#f1f1f1;font-size:11px;font-weight:800;margin-bottom:18px;letter-spacing:0.5px}
-.dark-section{background:var(--dark);color:#fff}
-.dark-section .section-head p,.dark-section .card p{color:#b8b8b8}
-.dark-section .card{background:#1a3324;border-color:#254431}
-.program-card{min-height:320px;display:flex;flex-direction:column;justify-content:space-between}
-.program-card:nth-child(1){background:var(--accent);color:#fff}
-.program-card:nth-child(1) .tag{background:rgba(255,255,255,0.15);color:#fff}
-.program-card:nth-child(1) p{color:#e0ece5}
-.program-card:nth-child(2){background:var(--soft);color:var(--ink);border-color:var(--line)}
-.program-card:nth-child(2) .tag{background:var(--accent2);color:#fff}
-.program-card:nth-child(3){background:#1d1d1b;color:#fff;border-color:#2d2d2a}
-.program-card:nth-child(3) .tag{background:rgba(255,255,255,0.1);color:#aaa}
-.levels{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
-.level{padding:8px 11px;border:1px solid rgba(0,0,0,.15);border-radius:999px;font-size:12px;font-weight:700}
-.program-card:nth-child(1) .level{border-color:rgba(255,255,255,0.3)}
-.test-section{background:var(--accent2);padding:80px 0;color:#fff}
-.test-section h2{color:#fff}
-.test-section p{color:#f5d7d7}
-.test-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.test-grid h2{font-size:clamp(38px,5vw,65px);line-height:.95;letter-spacing:-3px}
-.test-grid p{margin:20px 0;max-width:500px}
-.test-box{background:#fff;border-radius:22px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.08);color:var(--ink)}
-.test-box h3{font-size:24px;margin-bottom:20px}
-.steps{display:grid;gap:14px}
-.step{display:flex;gap:15px;align-items:flex-start}
-.step-num{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800;flex:none}
-.step strong{display:block;font-size:15px}
-.step span{font-size:13px;color:var(--muted)}
-.teacher{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.teacher-card{border:1px solid var(--line);border-radius:18px;overflow:hidden}
-.teacher-photo{height:230px;background:#eaeae7;display:grid;place-items:center}
-.teacher-photo .placeholder{margin:20px;border:1px dashed #bbb;background:#f9f9f7}
-.teacher-info{padding:18px}
-.teacher-info h3{font-size:18px}
-.teacher-info p{font-size:13px;color:var(--muted);margin-top:5px}
-.story{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.story-card{background:var(--soft);border-radius:20px;padding:30px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid rgba(26,89,53,0.1)}
-.story-card blockquote{font-size:25px;line-height:1.1;letter-spacing:-1px;color:var(--dark)}
-.story-card small{color:var(--muted);font-weight:600}
-.cta{padding:85px 0;text-align:center}
-.cta h2{font-size:clamp(42px,6vw,78px);letter-spacing:-4px;line-height:.95;max-width:760px;margin:auto;color:var(--accent)}
-.cta p{color:var(--muted);max-width:500px;margin:20px auto 28px}
-footer{background:var(--dark);color:#fff;padding:55px 0 30px}
-.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
-footer h3{font-size:26px;letter-spacing:-1px;color:var(--white)}
-footer p,footer a{font-size:13px;color:#cbdad0}
-footer a:hover{color:var(--accent2)}
-footer h4{font-size:13px;margin-bottom:14px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px}
-.footer-links{display:grid;gap:8px}
-.copyright{border-top:1px solid #1e3d2a;margin-top:45px;padding-top:20px;color:#8fa396;font-size:12px}
 
-/* Modal Popup Styles */
-.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);display:none;justify-content:center;align-items:center;z-index:100;}
-.modal-content{background:#fff;border-radius:24px;padding:36px;width:90%;max-width:680px;max-height:85vh;overflow-y:auto;position:relative;box-shadow:0 20px 40px rgba(0,0,0,0.2);}
-.close-modal{position:absolute;top:20px;right:25px;font-size:28px;cursor:pointer;color:var(--muted);}
-.q-block{margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--line);}
-.q-title{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--ink);}
-.opt-label{display:block;margin:8px 0;padding:10px 14px;border:1px solid var(--line);border-radius:10px;cursor:pointer;transition:0.2s;}
-.opt-label:hover{background:var(--soft);border-color:var(--accent);}
-.opt-label input{margin-right:10px;}
-.form-group{margin-bottom:15px;}
-.form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:5px;}
-.form-group input{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;font-size:14px;}
+/* PLACEMENT TEST UI */
+.page-view { display:none; }
+.page-view.active { display:block; }
 
-@media(max-width:850px){
- .navlinks{display:none}.hero-grid,.test-grid,.story{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.teacher{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}.hero-art{min-height:350px}
+.input-field {
+    width:100%;
+    padding:12px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin-bottom:15px;
 }
-@media(max-width:560px){
- .container{padding:0 18px}.cards,.teacher,.footer-grid{grid-template-columns:1fr}.hero h1{letter-spacing:-3px}.section-head{display:block}.section-head p{margin-top:18px}.hero{padding-top:60px}
+
+.progress-bar-container {
+    width:100%;
+    background:#e0e0e0;
+    height:10px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.progress-bar {
+    height:100%;
+    background:var(--accent);
+    width:0%;
+    border-radius:10px;
+}
+
+.question-card {
+    margin-bottom:25px;
+    padding-bottom:15px;
+    border-bottom:1px solid #eee;
+}
+
+.question-title {
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.options-list { list-style:none; padding:0; }
+.options-list label {
+    display:flex;
+    padding:10px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin-bottom:8px;
+    cursor:pointer;
+}
+
+/* Responsive */
+@media(max-width:850px){
+ .navlinks{display:none}
+ .hero-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
+
 <body>
 
+<!-- ============================
+     NAVIGATION
+============================ -->
 <nav>
   <div class="container" style="display:flex;align-items:center;justify-content:space-between;width:100%">
-    <a class="logo" href="#" style="display:flex; align-items:center; height:80px; overflow:hidden;">
-      <img src="logo.jpg" alt="ICONIC Learning Centre">
-    </a>
+    <a class="logo" href="#">ICONIC<span> Learning Centre</span></a>
     <div class="navlinks">
       <a href="#about">About</a>
       <a href="#universe">ICONIC Universe</a>
@@ -149,11 +126,13 @@ footer h4{font-size:13px;margin-bottom:14px;color:var(--accent2);text-transform:
       <a href="#connect">ICONIC Connect</a>
       <a href="#insights">Insights</a>
     </div>
-    <!-- Button Text Changed to 'Test Your English' -->
-    <button class="btn dark" onclick="openTestModal()">Test Your English</button>
+    <a class="btn dark" href="#placement">Take Placement Test</a>
   </div>
 </nav>
 
+<!-- ============================
+     HERO SECTION
+============================ -->
 <header class="hero">
   <div class="container hero-grid">
     <div>
@@ -162,219 +141,194 @@ footer h4{font-size:13px;margin-bottom:14px;color:var(--accent2);text-transform:
       <p>Build your English. Grow your confidence. Prepare for the future.</p>
       <div class="hero-actions">
         <a class="btn dark" href="#universe">Explore ICONIC Universe →</a>
-        <button class="btn light" onclick="openTestModal()">Find Your Level</button>
-      </div>
-    </div>
-    <div class="hero-art">
-      <div class="orb"></div><div class="orb2"></div>
-      <div style="position:relative;z-index:2;font-size:13px;letter-spacing:1px;font-weight:700">YOUR JOURNEY STARTS HERE</div>
-      <div class="hero-card">
-        <div class="tag">ICONIC JOURNEY</div>
-        <h3>Discover where you are.<br>Decide where you want to go.</h3>
-        <p>Then build the skills to get there.</p>
+        <a class="btn light" href="#placement">Find Your Level</a>
       </div>
     </div>
   </div>
 </header>
 
-<section id="about">
-  <div class="container">
-    <div class="section-head">
-      <h2>English is more than a subject.</h2>
-      <p>At ICONIC, we help learners develop the skills, confidence, and mindset they need for their next chapter.</p>
-    </div>
-    <div class="cards">
-      <div class="card"><div class="icon">↗</div><h3>Growth</h3><p>Learn at your level and keep moving forward.</p></div>
-      <div class="card"><div class="icon">◎</div><h3>Confidence</h3><p>Use English with greater confidence in real situations.</p></div>
-      <div class="card"><div class="icon">✦</div><h3>Opportunity</h3><p>Build skills that support your academic and future goals.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="universe" class="dark-section">
-  <div class="container">
-    <div class="section-head">
-      <h2>Welcome to the ICONIC Universe.</h2>
-      <p>One learning universe. Multiple pathways. Your future journey starts here.</p>
-    </div>
-    <div class="cards">
-      <div class="card program-card">
-        <div><div class="tag">GENERAL ENGLISH</div><h3>English Level Up</h3><p>Build a strong English foundation and progress through your learning journey.</p></div>
-        <div class="levels"><span class="level">A1</span><span class="level">A2</span><span class="level">B1</span><span class="level">B2</span><span class="level">C1</span></div>
-      </div>
-      <div class="card program-card">
-        <div><div class="tag">EXAM PREPARATION</div><h3>Exam Prep</h3><p>Prepare strategically for internationally recognized English tests.</p></div>
-        <div class="levels"><span class="level">IELTS</span><span class="level">DET</span></div>
-      </div>
-      <div class="card program-card">
-        <div><div class="tag">COMING SOON</div><h3>Future Pathways</h3><p>Academic English, scholarship preparation, career English, and more.</p></div>
-        <a class="btn dark" href="#contact" style="background:var(--accent2);border-color:var(--accent2)">Explore Future Programs →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- ============================
+     PLACEMENT TEST SECTION
+============================ -->
 <section id="placement" class="test-section">
-  <div class="container test-grid">
-    <div>
-      <div class="eyebrow" style="color:#fff; opacity:0.9;">Not sure where to start?</div>
-      <h2>Find the right path for your English journey.</h2>
-      <p>Take our placement test to understand your current level and discover the ICONIC pathway that fits your goals.</p>
-      <!-- Button Text Changed to 'Start Test →' -->
-      <button class="btn dark" onclick="openTestModal()" style="background:var(--dark);border-color:var(--dark)">Start Test →</button>
+  <div class="container">
+    <h2 style="color:var(--accent);font-size:42px;margin-bottom:20px;">Placement Test</h2>
+    <p style="color:var(--muted);max-width:500px;">Start your English journey with our level assessment.</p>
+  </div>
+
+  <!-- ============================
+       EMBEDDED PLACEMENT TEST UI
+  ============================= -->
+  <div id="placement-test-ui" style="margin-top:40px;max-width:800px;margin:auto;">
+
+    <!-- PAGE 1 -->
+    <div id="page-welcome" class="page-view active" style="background:#fff;padding:40px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+        <h2 style="color:var(--accent);font-size:32px;margin-bottom:10px;">Start Your Placement Test</h2>
+        <p style="color:var(--muted);margin-bottom:25px;">Fill in your information to begin.</p>
+
+        <form id="user-info-form">
+            <input type="text" id="student_name" class="input-field" placeholder="Full Name" required>
+            <input type="email" id="student_email" class="input-field" placeholder="Email Address" required>
+            <input type="tel" id="student_phone" class="input-field" placeholder="Phone Number" required>
+            <button type="button" class="btn dark" onclick="startTest()">Start Test</button>
+        </form>
     </div>
-    <div class="test-box">
-      <h3>Your journey in 4 steps</h3>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div><strong>Take the Test</strong><span>Complete your English assessment.</span></div></div>
-        <div class="step"><div class="step-num">2</div><div><strong>Discover Your Level</strong><span>Understand where you are now.</span></div></div>
-        <div class="step"><div class="step-num">3</div><div><strong>Get Your Recommendation</strong><span>Find the learning pathway for your goals.</span></div></div>
-        <div class="step"><div class="step-num">4</div><div><strong>Start Your ICONIC Journey</strong><span>Take the next step with confidence.</span></div></div>
-      </div>
+
+    <!-- PAGE 2 -->
+    <div id="page-test" class="page-view" style="background:#fff;padding:40px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+        <div class="progress-bar-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <h2 style="color:var(--accent);font-size:28px;margin-bottom:10px;">Placement Test</h2>
+        <span id="page-indicator" style="font-weight:bold;color:#666;">Page 1</span>
+
+        <div id="questions-container"></div>
+
+        <div style="display:flex;justify-content:space-between;margin-top:20px;">
+            <button id="prev-btn" class="btn light" onclick="changePage(-1)" style="display:none;">Previous</button>
+            <button id="next-btn" class="btn dark" onclick="changePage(1)">Next</button>
+            <button id="submit-btn" class="btn accent" onclick="submitTest()" style="display:none;">Submit</button>
+        </div>
     </div>
+
+    <!-- PAGE 3 -->
+    <div id="page-result" class="page-view" style="background:#fff;padding:40px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.08);text-align:center;">
+        <h2 style="color:var(--accent);font-size:32px;">Thank You!</h2>
+        <p>Your test has been submitted successfully.</p>
+        <h3 id="score-display" style="margin-top:20px;font-size:26px;color:var(--accent2);"></h3>
+        <button class="btn dark" onclick="location.reload()">Restart</button>
+    </div>
+
   </div>
 </section>
 
-<!-- TEST FORM MODAL -->
-<div class="modal-overlay" id="testModal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeTestModal()">&times;</span>
-    <h2 style="font-size:26px; margin-bottom:10px; color:var(--accent);">ICONIC English Level Test</h2>
-    <p style="font-size:14px; color:var(--muted); margin-bottom:24px;">Please fill in your details and answer the grammar questions below.</p>
-    
-    <form id="quizForm" onsubmit="handleTestSubmit(event)">
-      <div class="form-group">
-        <label>Full Name *</label>
-        <input type="text" id="student_name" required placeholder="Enter your full name">
-      </div>
-      <div class="form-group">
-        <label>Email Address *</label>
-        <input type="email" id="student_email" required placeholder="Enter your email address">
-      </div>
-      <div class="form-group">
-        <label>Phone Number *</label>
-        <input type="tel" id="student_phone" required placeholder="Enter your phone number">
-      </div>
-
-      <hr style="margin:20px 0; border:none; border-top:1px solid var(--line);">
-
-      <!-- Question 1 -->
-      <div class="q-block">
-        <div class="q-title">1. She _____ to school by bus every morning.</div>
-        <label class="opt-label"><input type="radio" name="q1" value="A" required> A) go</label>
-        <label class="opt-label"><input type="radio" name="q1" value="B"> B) goes</label>
-        <label class="opt-label"><input type="radio" name="q1" value="C"> C) going</label>
-        <label class="opt-label"><input type="radio" name="q1" value="D"> D) went</label>
-      </div>
-
-      <!-- Question 2 -->
-      <div class="q-block">
-        <div class="q-title">2. If it rains tomorrow, we _____ stay at home.</div>
-        <label class="opt-label"><input type="radio" name="q2" value="A" required> A) will</label>
-        <label class="opt-label"><input type="radio" name="q2" value="B"> B) would</label>
-        <label class="opt-label"><input type="radio" name="q2" value="C"> C) have</label>
-        <label class="opt-label"><input type="radio" name="q2" value="D"> D) were</label>
-      </div>
-
-      <!-- Question 3 -->
-      <div class="q-block">
-        <div class="q-title">3. I have lived in Yangon _____ 2018.</div>
-        <label class="opt-label"><input type="radio" name="q3" value="A" required> A) for</label>
-        <label class="opt-label"><input type="radio" name="q3" value="B"> B) since</label>
-        <label class="opt-label"><input type="radio" name="q3" value="C"> C) from</label>
-        <label class="opt-label"><input type="radio" name="q3" value="D"> D) until</label>
-      </div>
-
-      <!-- Question 4 -->
-      <div class="q-block">
-        <div class="q-title">4. This book is _____ than the one I read last week.</div>
-        <label class="opt-label"><input type="radio" name="q4" value="A" required> A) interesting</label>
-        <label class="opt-label"><input type="radio" name="q4" value="B"> B) more interesting</label>
-        <label class="opt-label"><input type="radio" name="q4" value="C"> C) most interesting</label>
-        <label class="opt-label"><input type="radio" name="q4" value="D"> D) as interesting</label>
-      </div>
-
-      <!-- Question 5 -->
-      <div class="q-block">
-        <div class="q-title">5. By the time he arrived, the meeting _____.</div>
-        <label class="opt-label"><input type="radio" name="q5" value="A" required> A) started</label>
-        <label class="opt-label"><input type="radio" name="q5" value="B"> B) has started</label>
-        <label class="opt-label"><input type="radio" name="q5" value="C"> C) had started</label>
-        <label class="opt-label"><input type="radio" name="q5" value="D"> D) starts</label>
-      </div>
-
-      <button type="submit" class="btn dark" style="width:100%; font-size:16px; padding:15px;" id="submitBtn">Submit Test & Get Result</button>
-    </form>
-  </div>
-</div>
-
-<footer id="contact">
-  <div class="container">
-    <div class="footer-grid">
-      <div><h3>ICONIC Learning Centre</h3><p style="margin-top:12px;max-width:260px;color:#a3bdae;">Learn English. Build confidence. Shape your future.</p></div>
-      <div><h4>Explore</h4><div class="footer-links"><a href="#about">About Us</a><a href="#universe">ICONIC Universe</a><a href="#teachers">Teachers</a><a href="#connect">ICONIC Connect</a></div></div>
-      <div><h4>Learn</h4><div class="footer-links"><a href="javascript:void(0)" onclick="openTestModal()">Placement Test</a><a href="#insights">Student Stories</a><a href="#insights">Insights</a></div></div>
-      <div><h4>Connect</h4><div class="footer-links"><a href="#">Facebook</a><a href="#">Messenger</a><a href="#">Contact Us</a></div></div>
-    </div>
-    <div class="copyright">© 2026 ICONIC Learning Centre. All rights reserved.</div>
-  </div>
+<!-- ============================
+     FOOTER
+============================ -->
+<footer style="background:var(--dark);color:#fff;padding:40px;text-align:center;">
+  <p>© 2026 ICONIC Learning Centre</p>
 </footer>
 
+<!-- ============================
+     JAVASCRIPT LOGIC
+============================ -->
 <script>
-function openTestModal() {
-  document.getElementById('testModal').style.display = 'flex';
+/* ============================
+   QUESTIONS ARRAY (60 ITEMS)
+============================ */
+const questions = [
+  /* Aung, paste your 60-question array here */
+];
+
+/* ============================
+   TEST LOGIC
+============================ */
+const QUESTIONS_PER_PAGE = 5;
+let currentPage = 0;
+let userAnswers = {};
+let studentData = {};
+
+function showPage(id) {
+    document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
 }
-function closeTestModal() {
-  document.getElementById('testModal').style.display = 'none';
+
+function startTest() {
+    const name = studentData.name = document.getElementById("student_name").value.trim();
+    const email = studentData.email = document.getElementById("student_email").value.trim();
+    const phone = studentData.phone = document.getElementById("student_phone").value.trim();
+
+    if (!name || !email || !phone) return alert("Please fill all fields.");
+
+    showPage("page-test");
+    renderQuestions();
 }
 
-function handleTestSubmit(event) {
-  event.preventDefault();
-  
-  const submitBtn = document.getElementById('submitBtn');
-  submitBtn.innerText = 'Submitting & Calculating...';
-  submitBtn.disabled = true;
+function renderQuestions() {
+    const container = document.getElementById("questions-container");
+    container.innerHTML = "";
 
-  // Correct Answers
-  const answers = { q1: 'B', q2: 'A', q3: 'B', q4: 'B', q5: 'C' };
-  let score = 0;
-  
-  for (let i = 1; i <= 5; i++) {
-    const selected = document.querySelector(`input[name="q${i}"]:checked`);
-    if (selected && selected.value === answers[`q${i}`]) {
-      score += 20; // 5 questions = 100 points
-    }
-  }
+    const start = currentPage * QUESTIONS_PER_PAGE;
+    const end = Math.min(start + QUESTIONS_PER_PAGE, questions.length);
+    const pageQuestions = questions.slice(start, end);
 
-  let level = "Elementary (A1-A2)";
-  if(score >= 80) level = "Advanced / Exam Prep (C1)";
-  else if(score >= 60) level = "Upper-Intermediate (B2)";
-  else if(score >= 40) level = "Intermediate (B1)";
+    pageQuestions.forEach(q => {
+        const div = document.createElement("div");
+        div.className = "question-card";
 
-  const templateParams = {
-    student_name: document.getElementById('student_name').value,
-    student_email: document.getElementById('student_email').value,
-    student_phone: document.getElementById('student_phone').value,
-    score: score + " / 100",
-    recommended_level: level
-  };
+        let optionsHTML = "";
+        q.options.forEach((opt, idx) => {
+            const checked = userAnswers[q.id] === idx ? "checked" : "";
+            optionsHTML += `
+                <li>
+                    <label>
+                        <input type="radio" name="q_${q.id}" value="${idx}" ${checked}
+                        onchange="saveAnswer(${q.id}, ${idx})">
+                        ${opt}
+                    </label>
+                </li>`;
+        });
 
-  // TODO: Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID'
-  emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
-    .then(function() {
-       alert(`Thank you, ${templateParams.student_name}!\nYour test score is: ${score}%\nRecommended Level: ${level}\nYour results have been sent via email.`);
-       closeTestModal();
-       document.getElementById('quizForm').reset();
-       submitBtn.innerText = 'Submit Test & Get Result';
-       submitBtn.disabled = false;
-    }, function(error) {
-       console.log('FAILED...', error);
-       alert(`Test completed!\nYour score: ${score}%\nRecommended Level: ${level}\n(Note: Email setup pending Key configuration)`);
-       closeTestModal();
-       document.getElementById('quizForm').reset();
-       submitBtn.innerText = 'Submit Test & Get Result';
-       submitBtn.disabled = false;
+        div.innerHTML = `
+            <div class="question-title">${q.id}. ${q.text}</div>
+            <ul class="options-list">${optionsHTML}</ul>
+        `;
+        container.appendChild(div);
     });
+
+    const totalPages = Math.ceil(questions.length / QUESTIONS_PER_PAGE);
+    document.getElementById("page-indicator").innerText =
+        `Page ${currentPage + 1} of ${totalPages}`;
+
+    document.getElementById("prev-btn").style.display =
+        currentPage === 0 ? "none" : "inline-block";
+
+    if (currentPage === totalPages - 1) {
+        document.getElementById("next-btn").style.display = "none";
+        document.getElementById("submit-btn").style.display = "inline-block";
+    } else {
+        document.getElementById("next-btn").style.display = "inline-block";
+        document.getElementById("submit-btn").style.display = "none";
+    }
+
+    document.getElementById("progress-bar").style.width =
+        ((currentPage + 1) / totalPages) * 100 + "%";
+}
+
+function saveAnswer(qId, idx) {
+    userAnswers[qId] = idx;
+}
+
+function changePage(dir) {
+    currentPage += dir;
+    renderQuestions();
+}
+
+function submitTest() {
+    let score = 0;
+    questions.forEach(q => {
+        if (userAnswers[q.id] === q.answer) score++;
+    });
+
+    const params = {
+        user_name: studentData.name,
+        user_email: studentData.email,
+        user_phone: studentData.phone,
+        score: `${score} / ${questions.length}`,
+        message: `Student ${studentData.name} scored ${score}/${questions.length}`
+    };
+
+    emailjs.send("service_co1k8t1", "template_s4oaq5m", params)
+        .then(() => {
+            document.getElementById("score-display").innerText =
+                `Your Score: ${score} / ${questions.length}`;
+            showPage("page-result");
+        })
+        .catch(err => {
+            alert("Error sending results.");
+            console.error(err);
+        });
 }
 </script>
 
