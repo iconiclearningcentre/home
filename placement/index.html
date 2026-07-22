@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Iconic Placement Test</title>
 
+  <!-- Load Questions -->
+  <script src="questions.js"></script>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    emailjs.init("KMcU2T2LvoWD9Auvf");
+  </script>
+
+  <style>
+    body { font-family: Arial; padding: 20px; line-height: 1.6; }
+    h1 { color: #333; }
+    .question-block { margin-bottom: 20px; }
+    #result { margin-top: 30px; font-size: 22px; font-weight: bold; }
+  </style>
+</head>
+
+<body>
+
+<h1>English Placement Test</h1>
+
+<input id="studentName" placeholder="Your Name" required><br><br>
+<input id="studentEmail" placeholder="Your Email" required><br><br>
+
+<form id="testForm"></form>
+
+<button onclick="submitTest()">Submit Test</button>
+
+<div id="result"></div>
+
+<script>
+  const form = document.getElementById("testForm");
+
+  // Generate Questions
+  questions.forEach((q, index) => {
+    let html = `<div class='question-block'>
+      <p>${index + 1}. ${q.q}</p>`;
+
+    q.options.forEach((opt, i) => {
+      html += `
+        <label>
+          <input type="radio" name="q${index}" value="${i}">
+          ${opt}
+        </label><br>
+      `;
+    });
+
+    html += "</div><hr>";
+    form.innerHTML += html;
+  });
+
+  // Submit Test
+  function submitTest() {
+    let score = 0;
+
+    questions.forEach((q, index) => {
+      const answer = document.querySelector(`input[name="q${index}"]:checked`);
+      if (answer && Number(answer.value) === q.correct) {
+        score++;
+      }
+    });
+
+    document.getElementById("result").innerHTML =
+      `Your Score: ${score} / ${questions.length}`;
+
+    sendToGoogleSheet(score);
+    sendEmail(score);
+  }
+
+  // Google Sheet Saving
+  function sendToGoogleSheet(score) {
+    const name = document.getElementById("studentName").value;
+    const email = document.getElementById("studentEmail").value;
+
+    fetch("https://script.google.com/macros/s/AKfycby8hzA18ugQMGiiQhiuH29F5caMT8IE0GIAWm0Z1HvgiwflmnqVwuutAvbsJjesEdAi/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        score: score
+      })
+    });
+  }
+
+  // Email Sending
+  function sendEmail(score) {
+    const name = document.getElementById("studentName").value;
+    const email = document.getElementById("studentEmail").value;
+
+    emailjs.send("service_41d3118", "template_s6ryi9e", {
+      student_name: name,
+      student_email: email,
+      score: score
+    });
+  }
+</script>
+
+</body>
+</html>
