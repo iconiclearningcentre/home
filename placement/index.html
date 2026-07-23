@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iconic Placement Test</title>
 
-  <!-- Load Questions -->
+  <!-- Load Questions File -->
   <script src="./questions.js"></script>
 
-  <!-- EmailJS -->
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script>
-    emailjs.init("KMcU2T2LvoWD9Auvf");
+  <!-- EmailJS CDN (Official Updated Version) -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+       emailjs.init("KMcU2T2LvoWD9Auvf");
+    })();
   </script>
 
   <style>
@@ -19,8 +22,19 @@
     .question-block { margin-bottom: 20px; }
     #result { margin-top: 30px; font-size: 22px; font-weight: bold; color: #2e7d32; }
     input[type="text"], input[type="email"] { padding: 8px; width: 250px; margin-bottom: 10px; }
+    
+    /* Pagination Button Controls */
+    .button-group { margin-top: 20px; display: flex; gap: 15px; align-items: center; }
     button { padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px; }
     button:hover { background-color: #0056b3; }
+    button:disabled { background-color: #ccc; cursor: not-allowed; }
+    
+    #pageIndicator { font-weight: bold; font-size: 16px; }
+    #submitBtn { background-color: #28a745; display: none; }
+    #submitBtn:hover { background-color: #218838; }
+    
+    .page-container { display: none; }
+    .page-container.active { display: block; }
   </style>
 </head>
 
@@ -33,38 +47,92 @@
 
 <form id="testForm"></form>
 
-<button type="button" onclick="submitTest()">Submit Test</button>
+<!-- Navigation Controls -->
+<div class="button-group">
+  <button type="button" id="prevBtn" onclick="changePage(-1)" disabled>Previous</button>
+
+  <span id="pageIndicator">Page 1</span>
+
+  <button type="button" id="nextBtn" onclick="changePage(1)">Next</button>
+  <button type="button" id="submitBtn" onclick="submitTest()">Submit Test</button>
+</div>
 
 <div id="result"></div>
 
 <script>
-  // DOM အပြည့်အဝ Load ဖြစ်ပြီးမှ မေးခွန်းများ ထုတ်ပေးမည်
+  const questionsPerPage = 10; // စာမျက်နှာတစ်ခုလျှင် မေးခွန်း ၁၀ ခု
+  let currentPage = 1;
+  let totalPages = 1;
+
   document.addEventListener("DOMContentLoaded", () => {
     const testForm = document.getElementById("testForm");
-    
-    if (typeof questions !== "undefined" && Array.isArray(questions)) {
-      questions.forEach((q, index) => {
+
+    if (typeof questions === "undefined" || !Array.isArray(questions)) {
+      alert("questions.js ဖိုင် မတွေ့ပါ သို့မဟုတ် Error ရှိနေပါသည်။");
+      return;
+    }
+
+    totalPages = Math.ceil(questions.length / questionsPerPage);
+
+    // မေးခွန်းများကို ၁၀ ခုစီ ခွဲပြီး Container သီးသန့်ပြုလုပ်ခြင်း
+    for (let page = 1; page <= totalPages; page++) {
+      const pageDiv = document.createElement("div");
+      pageDiv.className = `page-container ${page === 1 ? 'active' : ''}`;
+      pageDiv.id = `page-${page}`;
+
+      const startIndex = (page - 1) * questionsPerPage;
+      const endIndex = Math.min(startIndex + questionsPerPage, questions.length);
+
+      for (let i = startIndex; i < endIndex; i++) {
+        const q = questions[i];
         let html = `
           <div class="question-block">
-            <p><strong>${index + 1}. ${q.q}</strong></p>
+            <p><strong>${i + 1}. ${q.q}</strong></p>
         `;
 
-        q.options.forEach((opt, i) => {
+        q.options.forEach((opt, optIndex) => {
           html += `
             <label>
-              <input type="radio" name="q${index}" value="${i}">
+              <input type="radio" name="q${i}" value="${optIndex}">
               ${opt}
             </label><br>
           `;
         });
 
         html += "</div><hr>";
-        testForm.innerHTML += html;
-      });
-    } else {
-      console.error("questions.js file မပွင့်ပါ သို့မဟုတ် ရေးသားပုံ လွဲမှားနေပါသည်။");
+        pageDiv.innerHTML += html;
+      }
+
+      testForm.appendChild(pageDiv);
     }
+
+    updatePagination();
   });
+
+  // စာမျက်နှာ ရှေ့/နောက် ပြောင်းလဲခြင်း
+  function changePage(direction) {
+    document.getElementById(`page-${currentPage}`).classList.remove("active");
+    currentPage += direction;
+    document.getElementById(`page-${currentPage}`).classList.add("active");
+
+    updatePagination();
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // စာမျက်နှာ ထိပ်ဆုံးသို့ ပြန်တင်ပေးခြင်း
+  }
+
+  // Buttons နှင့် Page Info များကို Update လုပ်ခြင်း
+  function updatePagination() {
+    document.getElementById("pageIndicator").innerText = `Page ${currentPage} of ${totalPages}`;
+    document.getElementById("prevBtn").disabled = currentPage === 1;
+
+    // နောက်ဆုံး Page ရောက်မှသာ Submit Button ပေါ်မည်
+    if (currentPage === totalPages) {
+      document.getElementById("nextBtn").style.display = "none";
+      document.getElementById("submitBtn").style.display = "inline-block";
+    } else {
+      document.getElementById("nextBtn").style.display = "inline-block";
+      document.getElementById("submitBtn").style.display = "none";
+    }
+  }
 
   // Submit Test Function
   function submitTest() {
@@ -72,7 +140,7 @@
     const email = document.getElementById("studentEmail").value.trim();
 
     if (!name || !email) {
-      alert("ကျေးဇူးပြု၍ အမည်နှင့် အီးမေးလ် ထည့်သွင်းပေးပါ။");
+      alert("ကျေးဇူးပြု၍ အမည်နှင့် အီးမေးလ် ဖြည့်သွင်းပေးပါ။");
       return;
     }
 
@@ -87,31 +155,28 @@
 
     document.getElementById("result").innerHTML = `Your Score: ${score} / ${questions.length}`;
 
+    // Google Sheet & EmailJS ပို့ခြင်း
     sendToGoogleSheet(name, email, score);
     sendEmail(name, email, score);
   }
 
-  // Google Sheet သို့ ပို့ခြင်း
   function sendToGoogleSheet(name, email, score) {
     fetch("https://script.google.com/macros/s/AKfycby8hzA18ugQMGiiQhiuH29F5caMT8IE0GIAWm0Z1HvgiwflmnqVwuutAvbsJjesEdAi/exec", {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        score: score
-      })
+      body: JSON.stringify({ name: name, email: email, score: score })
     }).catch(err => console.error("Sheet Error:", err));
   }
 
-  // EmailJS မှတစ်ဆင့် အီးမေးလ် ပို့ခြင်း
   function sendEmail(name, email, score) {
-    emailjs.send("service_41d3118", "template_s6ryi9e", {
-      student_name: name,
-      student_email: email,
-      score: score
-    }).catch(err => console.error("Email Error:", err));
+    if (typeof emailjs !== "undefined") {
+      emailjs.send("service_41d3118", "template_s6ryi9e", {
+        student_name: name,
+        student_email: email,
+        score: score
+      }).catch(err => console.error("Email Error:", err));
+    }
   }
 </script>
 
