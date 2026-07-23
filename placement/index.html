@@ -8,7 +8,7 @@
   <!-- Load Questions File -->
   <script src="./questions.js"></script>
 
-  <!-- EmailJS CDN (Official Updated Version) -->
+  <!-- EmailJS CDN -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
     (function(){
@@ -20,10 +20,9 @@
     body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; max-width: 800px; margin: auto; }
     h1 { color: #333; }
     .question-block { margin-bottom: 20px; }
-    #result { margin-top: 30px; font-size: 22px; font-weight: bold; color: #2e7d32; }
     input[type="text"], input[type="email"] { padding: 8px; width: 250px; margin-bottom: 10px; }
     
-    /* Pagination Button Controls */
+    /* Navigation Controls */
     .button-group { margin-top: 20px; display: flex; gap: 15px; align-items: center; }
     button { padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px; }
     button:hover { background-color: #0056b3; }
@@ -35,6 +34,29 @@
     
     .page-container { display: none; }
     .page-container.active { display: block; }
+
+    /* Custom Popup (Modal) Styling */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .modal-box h2 { margin-top: 0; color: #2e7d32; }
+    .modal-box p { font-size: 20px; font-weight: bold; margin: 20px 0; }
+    .modal-box button { background-color: #007bff; padding: 10px 25px; }
   </style>
 </head>
 
@@ -57,10 +79,17 @@
   <button type="button" id="submitBtn" onclick="submitTest()">Submit Test</button>
 </div>
 
-<div id="result"></div>
+<!-- Score Popup (Modal) -->
+<div id="scoreModal" class="modal-overlay">
+  <div class="modal-box">
+    <h2>Test Completed!</h2>
+    <p id="modalScoreText">Your Score: 0 / 0</p>
+    <button type="button" onclick="closePopupAndGoHome()">OK / Return to Home</button>
+  </div>
+</div>
 
 <script>
-  const questionsPerPage = 10; // စာမျက်နှာတစ်ခုလျှင် မေးခွန်း ၁၀ ခု
+  const questionsPerPage = 10;
   let currentPage = 1;
   let totalPages = 1;
 
@@ -74,7 +103,6 @@
 
     totalPages = Math.ceil(questions.length / questionsPerPage);
 
-    // မေးခွန်းများကို ၁၀ ခုစီ ခွဲပြီး Container သီးသန့်ပြုလုပ်ခြင်း
     for (let page = 1; page <= totalPages; page++) {
       const pageDiv = document.createElement("div");
       pageDiv.className = `page-container ${page === 1 ? 'active' : ''}`;
@@ -109,22 +137,19 @@
     updatePagination();
   });
 
-  // စာမျက်နှာ ရှေ့/နောက် ပြောင်းလဲခြင်း
   function changePage(direction) {
     document.getElementById(`page-${currentPage}`).classList.remove("active");
     currentPage += direction;
     document.getElementById(`page-${currentPage}`).classList.add("active");
 
     updatePagination();
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // စာမျက်နှာ ထိပ်ဆုံးသို့ ပြန်တင်ပေးခြင်း
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Buttons နှင့် Page Info များကို Update လုပ်ခြင်း
   function updatePagination() {
     document.getElementById("pageIndicator").innerText = `Page ${currentPage} of ${totalPages}`;
     document.getElementById("prevBtn").disabled = currentPage === 1;
 
-    // နောက်ဆုံး Page ရောက်မှသာ Submit Button ပေါ်မည်
     if (currentPage === totalPages) {
       document.getElementById("nextBtn").style.display = "none";
       document.getElementById("submitBtn").style.display = "inline-block";
@@ -134,7 +159,6 @@
     }
   }
 
-  // Submit Test Function
   function submitTest() {
     const name = document.getElementById("studentName").value.trim();
     const email = document.getElementById("studentEmail").value.trim();
@@ -153,11 +177,23 @@
       }
     });
 
-    document.getElementById("result").innerHTML = `Your Score: ${score} / ${questions.length}`;
-
-    // Google Sheet & EmailJS ပို့ခြင်း
+    // Google Sheet & EmailJS သို့ အချက်အလက်များ ပို့ခြင်း
     sendToGoogleSheet(name, email, score);
     sendEmail(name, email, score);
+
+    // Popup ပေါ်တင်ပြခြင်း
+    document.getElementById("modalScoreText").innerText = `Your Score: ${score} / ${questions.length}`;
+    document.getElementById("scoreModal").style.display = "flex";
+  }
+
+  // Popup ကိုပိတ်ပြီး Homepage သို့ ပြန်သွားခြင်း
+  function closePopupAndGoHome() {
+    document.getElementById("scoreModal").style.display = "none";
+    
+    // Page ကို အစသို့ ပြန်လည် Reset/Reload လုပ်ပေးခြင်း (Homepage သို့ ရောက်ရှိစေမည်)
+    window.location.reload(); 
+    // သို့မဟုတ် တခြား Homepage URL သို့ သွားစေချင်ပါက အောက်ပါအတိုင်း ရေးနိုင်ပါတယ် -
+    // window.location.href = "https://yourwebsite.com";
   }
 
   function sendToGoogleSheet(name, email, score) {
