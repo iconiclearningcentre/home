@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Iconic Placement Test</title>
 
   <!-- Load Questions -->
@@ -13,10 +14,13 @@
   </script>
 
   <style>
-    body { font-family: Arial; padding: 20px; line-height: 1.6; }
+    body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; max-width: 800px; margin: auto; }
     h1 { color: #333; }
     .question-block { margin-bottom: 20px; }
-    #result { margin-top: 30px; font-size: 22px; font-weight: bold; }
+    #result { margin-top: 30px; font-size: 22px; font-weight: bold; color: #2e7d32; }
+    input[type="text"], input[type="email"] { padding: 8px; width: 250px; margin-bottom: 10px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px; }
+    button:hover { background-color: #0056b3; }
   </style>
 </head>
 
@@ -24,38 +28,54 @@
 
 <h1>English Placement Test</h1>
 
-<input id="studentName" placeholder="Your Name" required><br><br>
-<input id="studentEmail" placeholder="Your Email" required><br><br>
+<input id="studentName" type="text" placeholder="Your Name" required><br>
+<input id="studentEmail" type="email" placeholder="Your Email" required><br><br>
 
 <form id="testForm"></form>
 
-<button onclick="submitTest()">Submit Test</button>
+<button type="button" onclick="submitTest()">Submit Test</button>
 
 <div id="result"></div>
 
 <script>
-  const form = document.getElementById("testForm");
+  // DOM အပြည့်အဝ Load ဖြစ်ပြီးမှ မေးခွန်းများ ထုတ်ပေးမည်
+  document.addEventListener("DOMContentLoaded", () => {
+    const testForm = document.getElementById("testForm");
+    
+    if (typeof questions !== "undefined" && Array.isArray(questions)) {
+      questions.forEach((q, index) => {
+        let html = `
+          <div class="question-block">
+            <p><strong>${index + 1}. ${q.q}</strong></p>
+        `;
 
-  // Generate Questions
-  questions.forEach((q, index) => {
-    let html = `<div class='question-block'>
-      <p>${index + 1}. ${q.q}</p>`;
+        q.options.forEach((opt, i) => {
+          html += `
+            <label>
+              <input type="radio" name="q${index}" value="${i}">
+              ${opt}
+            </label><br>
+          `;
+        });
 
-    q.options.forEach((opt, i) => {
-      html += `
-        <label>
-          <input type="radio" name="q${index}" value="${i}">
-          ${opt}
-        </label><br>
-      `;
-    });
-
-    html += "</div><hr>";
-    form.innerHTML += html;
+        html += "</div><hr>";
+        testForm.innerHTML += html;
+      });
+    } else {
+      console.error("questions.js file မပွင့်ပါ သို့မဟုတ် ရေးသားပုံ လွဲမှားနေပါသည်။");
+    }
   });
 
-  // Submit Test
+  // Submit Test Function
   function submitTest() {
+    const name = document.getElementById("studentName").value.trim();
+    const email = document.getElementById("studentEmail").value.trim();
+
+    if (!name || !email) {
+      alert("ကျေးဇူးပြု၍ အမည်နှင့် အီးမေးလ် ထည့်သွင်းပေးပါ။");
+      return;
+    }
+
     let score = 0;
 
     questions.forEach((q, index) => {
@@ -65,16 +85,35 @@
       }
     });
 
-    document.getElementById("result").innerHTML =
-      `Your Score: ${score} / ${questions.length}`;
+    document.getElementById("result").innerHTML = `Your Score: ${score} / ${questions.length}`;
 
-    sendToGoogleSheet(score);
-    sendEmail(score);
+    sendToGoogleSheet(name, email, score);
+    sendEmail(name, email, score);
   }
 
-  // Google Sheet Saving
-  function sendToGoogleSheet(score) {
-    const name = document.getElementById("studentName").value;
-    const email = document.getElementById("studentEmail").value;
+  // Google Sheet သို့ ပို့ခြင်း
+  function sendToGoogleSheet(name, email, score) {
+    fetch("https://script.google.com/macros/s/AKfycby8hzA18ugQMGiiQhiuH29F5caMT8IE0GIAWm0Z1HvgiwflmnqVwuutAvbsJjesEdAi/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        score: score
+      })
+    }).catch(err => console.error("Sheet Error:", err));
+  }
 
-    fetch("https://script.google.com/macros/s/AKfycby8hzA18ugQMGiiQhiuH29F5caMT8
+  // EmailJS မှတစ်ဆင့် အီးမေးလ် ပို့ခြင်း
+  function sendEmail(name, email, score) {
+    emailjs.send("service_41d3118", "template_s6ryi9e", {
+      student_name: name,
+      student_email: email,
+      score: score
+    }).catch(err => console.error("Email Error:", err));
+  }
+</script>
+
+</body>
+</html>
